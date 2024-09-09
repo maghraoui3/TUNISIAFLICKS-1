@@ -23,12 +23,9 @@ import { BiSolidTv } from "react-icons/bi";
 import { TbMenu2 } from "react-icons/tb";
 
 import { globalStore } from '@/store/store';
-import { AuthContext } from '@/context/AuthContext'; // Adjust the import as necessary
-import { logout } from '@/lib/auth.firebase';
 
 const Navbar = () => {
   const pathname = usePathname();
-  const { user } = useContext(AuthContext);
 
   const mobileNav = [
     { name: 'Home', href: '/', icon: <GoHome className='text-xl' />, activeIcon: <GoHomeFill className='text-xl text-red-500' /> },
@@ -41,13 +38,6 @@ const Navbar = () => {
   const asideState = globalStore((state: any) => state.fillWithSideBar);
   const updateAsideState = globalStore((state: any) => state.setFillWithSideBar);
 
-  const handleLogout = async () => {
-    try {
-      await logout();
-    } catch (error) {
-      console.error('Error signing out:', error);
-    }
-  };
 
   return (
     <nav>
@@ -65,12 +55,12 @@ const Navbar = () => {
               <div className="hidden sm:block sm:ml-6">
                 <div className="flex space-x-4">
                   <Link href="/">
-                    <p className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                    <p className="text-gray-300 hover:bg-zinc-700 hover:text-white px-3 py-2 rounded-xl text-sm font-medium">
                       Movies
                     </p>
                   </Link>
                   <Link href="/about">
-                    <p className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                    <p className="text-gray-300 hover:bg-zinc-700 hover:text-white px-3 py-2 rounded-xl text-sm font-medium">
                       TV Shows
                     </p>
                   </Link>
@@ -112,25 +102,11 @@ const Navbar = () => {
             </div>
             {/* User Profile or Login Button */}
             <div className="ml-4 flex items-center sm:ml-6">
-              {user ? (
-                <div className="flex items-center">
-                  {user.photoURL ? (
-                    <Image src={user.photoURL} alt="Profile Picture" width={40} height={40} className="rounded-full" />
-                  ) : (
-                    <div className="w-10 h-10 bg-gray-500 rounded-full flex items-center justify-center text-white text-sm">U</div>
-                  )}
-                  <span className="ml-2 text-white">{user.displayName || 'User'}</span>
-                  <button onClick={handleLogout} className="ml-4 text-white bg-red-600 hover:bg-red-400 dark:bg-red-700 dark:hover:bg-red-500 transition-all ease-in-out delay-75 px-3 py-2 rounded-full text-sm font-medium">
-                    Logout
-                  </button>
-                </div>
-              ) : (
                 <Link href="/auth/login">
-                  <p className="text-white bg-red-600 hover:bg-red-400 dark:bg-red-700 dark:hover:bg-red-500 transition-all ease-in-out delay-75 hover:text-white px-3 py-2 rounded-full text-sm font-medium">
+                  <p className="text-white bg-red-600 hover:bg-red-400 dark:bg-red-700 dark:hover:bg-red-500 transition-all ease-in-out delay-75 hover:text-white px-3 py-2 rounded-xl text-sm font-medium">
                     Login
                   </p>
                 </Link>
-              )}
             </div>
           </div>
         </div>

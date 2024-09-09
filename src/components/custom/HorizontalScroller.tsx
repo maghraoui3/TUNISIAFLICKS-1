@@ -46,9 +46,10 @@ function HorizontalScroller({ children }: any) {
     }, []);
 
     return (
-        <div className="relative flex justify-center w-full">
+        <div className="relative flex overflow-hidden">
             <Button
-                className="bg-transparent absolute top-1/2 left-0 transform -translate-y-1/2 p-2 focus:outline-none"
+                variant='link'
+                className="bg-transparent absolute top-1/2 left-0 transform -translate-y-1/2 p-2 focus:outline-none text-white"
                 onClick={() => scroll('left')}
             >
                 <FaChevronLeft />
@@ -62,7 +63,8 @@ function HorizontalScroller({ children }: any) {
             </div>
 
             <Button
-                className="bg-transparent absolute top-1/2 right-0 transform -translate-y-1/2 p-2 focus:outline-none"
+                variant='link'
+                className="bg-transparent absolute top-1/2 right-0 transform -translate-y-1/2 p-2 focus:outline-none text-white"
                 onClick={() => scroll('right')}
             >
                 <FaChevronRight />

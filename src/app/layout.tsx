@@ -11,7 +11,13 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "TunisiaFlicks",
-  description: "Welcome to TunisiaFlicks, your premier destination for streaming movies and TV shows. Dive into a vast collection of content, meticulously curated for a superior viewing experience. Enjoy detailed descriptions, ratings, and an ad-free environment—all completely free. Designed with user-friendliness in mind, TunisiaFlicks brings you seamless navigation and a sleek interface. Proudly crafted in Tunisia, our platform is committed to offering you the best in entertainment. Explore TunisiaFlicks today and discover your next cinematic adventure!",
+  description: "Welcome to TunisiaFlicks, your premier destination for streaming movies and TV shows.",
+  openGraph: {
+    title: "TunisiaFlicks",
+    description: "Stream movies and TV shows for free.",
+    type: 'website',
+    url: 'https://www.tunisiaflicks.com',
+  }
 };
 
 export default function RootLayout({
@@ -21,15 +27,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-      <Providers>
-        <Navbar />
-        <div className="bg-white text-black flex min-h-screen dark:bg-[#0d0c0f] dark:text-white">
-          <Sidebar />
-          <div className="flex justify-center p-4 sm:pt-20 pt-14 w-full">
-            {children}
+      <body className={`${inter.className} transition-colors duration-300`}>
+        <Providers>
+          <Navbar />
+          <div className="bg-white text-black flex min-h-screen dark:bg-[#0d0c0f] dark:text-white">
+            <Sidebar />
+            <main role="main" className="flex justify-center p-4 sm:pt-20 pt-14 w-full">
+              {children}
+            </main>
           </div>
-        </div>
         </Providers>
       </body>
     </html>

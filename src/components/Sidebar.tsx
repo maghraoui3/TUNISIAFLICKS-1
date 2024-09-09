@@ -100,7 +100,7 @@ const Sidebar = () => {
             <div className="flex flex-col items-center">
                 <button
                     onClick={toggleSidebar}
-                    className={`absolute scale-90 right-0 ${asideState ? 'hidden' : 'flex'} mt-2 bg-gray-700 text-white rounded-full focus:outline-none flex items-center justify-center transform transition-transform duration-300 hover:bg-gray-600`}
+                    className={`absolute scale-90 right-0 ${asideState ? 'hidden' : 'flex'} mt-2 bg-zinc-900 text-white rounded-lg focus:outline-none w-full flex items-center justify-center transform transition-transform duration-300 hover:bg-zinc-600`}
                 >
                     <span className={`transform scale-75 transition-transform duration-300 ${!isOpen ? 'rotate-180' : ''}`}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
@@ -118,7 +118,7 @@ const Sidebar = () => {
                             }
                             const isActive = item.path === "/" ? pathname === item.path : pathname.startsWith(item.path);
                             return (
-                                <Link key={index + item.title} href={item.path} className={`flex  ${isActive ? "text-red-600 font-bold hover:text-white hover:bg-red-500" : "text-gray-300 hover:text-white hover:bg-gray-900"} items-center w-full ${isOpen ? 'pl-10' : 'justify-center'} my-2 p-4 rounded-lg   transition-colors duration-200`}>
+                                <Link key={index + item.title} href={item.path} className={`flex  ${isActive ? "text-red-600 font-bold hover:text-white hover:bg-red-500" : "text-gray-300 hover:text-white hover:bg-zinc-800"} items-center w-full ${isOpen ? 'pl-10' : 'justify-center'} my-2 p-4 rounded-xl transition-colors duration-200`}>
                                     {item.DefIcon}
                                     <span className={`ml-3 ${isOpen ? 'block' : 'hidden'}`}>{item.title}</span>
                                 </Link>
@@ -128,12 +128,12 @@ const Sidebar = () => {
                 </nav>
             </div>
             <div>
-                <div className={`flex p-4 ${isOpen ? 'pl-10' : 'justify-center'} hover:bg-gray-700 transition-colors duration-200 cursor-pointer`}>
+                <div className={`flex p-4 ${isOpen ? 'pl-10' : 'justify-center'} hover:bg-zinc-800 transition-colors duration-200 cursor-pointer`}>
                     <FaCog className="text-xl" />
                     <span className={`ml-3 ${isOpen ? 'block' : 'hidden'}`}>Settings</span>
                 </div>
                 <div onClick={() => resolvedTheme === 'dark' ? setTheme('light') : setTheme('dark')
-                } className={`flex p-4 ${isOpen ? 'pl-10' : 'justify-center'} hover:bg-gray-700 transition-colors duration-200 cursor-pointer`}>
+                } className={`flex p-4 ${isOpen ? 'pl-10' : 'justify-center'} hover:bg-zinc-800 transition-colors duration-200 cursor-pointer`}>
                     {resolvedTheme === 'dark' ? <FiSun className="text-xl" /> : <FiMoon className="text-xl" />}
                     <span className={`ml-3 ${isOpen ? 'block' : 'hidden'}`}> {resolvedTheme === 'dark' ? "Light Mode" : "Dark Mode"}</span>
                 </div>

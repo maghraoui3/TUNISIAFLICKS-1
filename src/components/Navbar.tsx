@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -27,6 +27,18 @@ import { globalStore } from '@/store/store';
 const Navbar = () => {
   const pathname = usePathname();
 
+  useEffect(() => {
+    const handleContextMenu = (event) => {
+      event.preventDefault();
+    };
+
+    document.addEventListener('contextmenu', handleContextMenu);
+
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+    };
+  }, []);
+
   const mobileNav = [
     { name: 'Home', href: '/', icon: <GoHome className='text-xl' />, activeIcon: <GoHomeFill className='text-xl text-red-500' /> },
     { name: 'Movies', href: '/movies', icon: <BiMoviePlay className='text-xl' />, activeIcon: <BiSolidMoviePlay className='text-xl text-red-500' />  },
@@ -37,7 +49,6 @@ const Navbar = () => {
 
   const asideState = globalStore((state: any) => state.fillWithSideBar);
   const updateAsideState = globalStore((state: any) => state.setFillWithSideBar);
-
 
   return (
     <nav>
@@ -55,7 +66,7 @@ const Navbar = () => {
               <div className="hidden sm:block sm:ml-6">
                 <div className="flex space-x-4">
                   <Link href="/">
-                    <p className="text-gray-300 hover:bg-zinc-700 hover:text-white px-3 py-2 rounded-xl text-sm font-medium">
+                    <p className="text-red-500 hover:bg-zinc-700 hover:text-white px-3 py-2 rounded-xl text-sm font-medium">
                       Movies
                     </p>
                   </Link>

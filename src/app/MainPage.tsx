@@ -3,14 +3,10 @@ import React, { useState, useEffect } from 'react'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import {
   ContextMenu,
-  ContextMenuCheckboxItem,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuLabel,
-  ContextMenuRadioGroup,
-  ContextMenuRadioItem,
   ContextMenuSeparator,
-  ContextMenuShortcut,
   ContextMenuSub,
   ContextMenuSubContent,
   ContextMenuSubTrigger,
@@ -31,24 +27,12 @@ import { LuCopy } from "react-icons/lu";
 export default function MainPage() {
 
   const [data, setData] = useState(null);
-  const [data2, setData2] = useState(null);
 
   useEffect(() => {
     fetch('https://api.themoviedb.org/3/trending/movie/day?api_key=b5d2609c326586f7f753f77b085a0b31&language=en-US&page=1')
       .then(response => response.json())
       .then(data => {
         setData(data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, []);
-
-  useEffect(() => {
-    fetch('https://api.themoviedb.org/3/trending/movie/day?api_key=b5d2609c326586f7f753f77b085a0b31&language=en-US&page=1')
-      .then(response => response.json())
-      .then(data => {
-        setData2(data);
       })
       .catch(error => {
         console.log(error);

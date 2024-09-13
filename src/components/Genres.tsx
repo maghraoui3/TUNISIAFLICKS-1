@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import HorizontalScroller from './custom/HorizontalScroller';
 import { Button } from './ui/button';
+import Link from 'next/link';
 
 export default function Genres() {
 
@@ -27,14 +28,14 @@ export default function Genres() {
                 <HorizontalScroller className='flex overflow-hidden'>
                     {data.map((genre) => {
                         return (
-                            <div key={genre.id} className="">
+                            <Link href={`/genres/${genre.id}`} key={genre.id} className="">
                                 <Button className="px-4 py-2 bg-zinc-800 text-white hover:bg-zinc-500 rounded-xl">
                                     {genre.name}
                                 </Button>
-                            </div>
+                            </Link>
                         );
                     })}
                 </HorizontalScroller>}
         </div>
-  )
+    )
 }

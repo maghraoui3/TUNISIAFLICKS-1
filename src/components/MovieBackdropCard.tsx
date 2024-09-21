@@ -1,6 +1,5 @@
 "use client"
 import React from 'react'
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import {
     ContextMenu,
     ContextMenuContent,
@@ -12,9 +11,7 @@ import {
     ContextMenuSubTrigger,
     ContextMenuTrigger,
 } from "@/components/ui/context-menu"
-import { FaLongArrowAltRight } from "react-icons/fa";
 import Link from 'next/link';
-import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { IoMdStar } from "react-icons/io";
 import { FaHeart, FaBookmark, FaShareAlt, FaFacebook, FaWhatsapp, FaTelegram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";

@@ -1,5 +1,5 @@
 "use client";
-import MoviePoserCard from '@/components/MoviePoserCard';
+import MoviePosterCard from '@/components/MoviePosterCard';
 import React, { useState, useEffect } from 'react'
 import PaginationComponent from '@/components/PaginationComponent';
 
@@ -39,7 +39,7 @@ export default function Page({ params }: { params: { id: string } }) {
             : <div className='w-full'>
                 <p className='my-3 text-xl'>Genres</p>
                 <div className='flex w-full flex-wrap'>
-                    {data.map((movie, index) => <MoviePoserCard key={index} data={movie} />)}
+                    {data.map((movie) => <MoviePosterCard key={movie.id} id={movie.id} posterImg={movie.poster_path} voteAverage={movie.vote_average} title={movie.title} releaseDate={movie.release_date} />)}
                 </div>
                 <PaginationComponent
                     currentPage={currentPage}

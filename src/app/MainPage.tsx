@@ -102,7 +102,7 @@ export default function MainPage() {
             })}
           </CarouselContent>
           <div className='hidden sm:block'>
-            <CarouselPrevious  />
+            <CarouselPrevious />
             <CarouselNext />
           </div>
         </Carousel>

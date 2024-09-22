@@ -4,9 +4,9 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import Autoplay from "embla-carousel-autoplay"
 import { FaLongArrowAltRight } from "react-icons/fa";
 import Link from 'next/link';
-import Image from 'next/image';
 import Genres from '@/components/Genres';
 import MoviePosterCard from '@/components/MoviePosterCard'
+import MovieBackdropCard from '@/components/MovieBackdropCard';
 
 
 export default function MainPage() {
@@ -18,6 +18,7 @@ export default function MainPage() {
       .then(response => response.json())
       .then(data => {
         setData(data);
+        console.log(data);
       })
       .catch(error => {
         console.log(error);
@@ -51,24 +52,7 @@ export default function MainPage() {
               return (
                 <CarouselItem key={movie.id} className="transition-transform ease-in-out duration-400 select-none basis-[300px]
                  sm:basis-[400px] my-4 lg:basis-[500px] hover:scale-110 hover:border-2 border-black hover:z-10 pl-0 ml-4 shadow-black shadow-2xl">
-                  <Link href={"/"}>
-                    <div className='w-full h-[200px] sm:h-[272px] lg:h-[310px] rounded-xl z-0 relative'
-                      style={{
-                        backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.backdrop_path})`,
-                        backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'
-                      }} >
-                      <div className='absolute left-0 top-0 w-full h-[200px] sm:h-[272px] lg:h-[310px] z-10 bg-black opacity-10
-                       transition-opacity ease-in-out duration-700 hover:opacity-0' />
-                      <div className='absolute bottom-3 left-5 sm:left-3'>
-                        <p className='text-white text-lg sm:text-2xl font-semibold bbc-text-shadow'>{movie.title}</p>
-                        <p className='text-white text-sm sm:text-base font-semibold bbc-text-shadow'>{movie.release_date}</p>
-                        <label>
-                          <Image src={"/imdb-logo.png"} alt='IDMB' width={100} height={100} className="inline-block w-[30px] sm:w-[40px] mr-2" />
-                          <p className="inline-block bbc-text-shadow text-xs sm:text-base">{movie.vote_average} Rating</p>
-                        </label>
-                      </div>
-                    </div>
-                  </Link>
+                 <MovieBackdropCard key={movie.id} backdropImg={movie.backdrop_path} voteAverage={movie.vote_average} title={movie.title} releaseDate={movie.release_date} adult={movie.adult} />
                 </CarouselItem>
               )
             })}
@@ -96,7 +80,7 @@ export default function MainPage() {
               return (
                 <CarouselItem key={movie.id} className="transition-transform ease-in-out duration-400 select-none basis-[145px]
                  md:basis-[167px] my-4 p-0 ml-4 hover:scale-110 hover:z-10">
-                  <MoviePosterCard key={movie.id} id={movie.id} posterImg={movie.poster_path} voteAverage={movie.vote_average} title={movie.title} releaseDate={movie.release_date} />
+                  <MoviePosterCard key={movie.id} posterImg={movie.poster_path} voteAverage={movie.vote_average} title={movie.title} releaseDate={movie.release_date} adult={movie.adult} />
                 </CarouselItem>
               )
             })}

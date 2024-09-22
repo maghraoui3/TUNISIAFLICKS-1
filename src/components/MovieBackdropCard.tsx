@@ -32,6 +32,7 @@ import { SlOptions } from "react-icons/sl";
 import { useMediaQuery } from '@/hooks/use-media-query';
 import { Button } from './ui/button';
 import Image from 'next/image';
+import { Skeleton } from './ui/skeleton';
 
 const MovieCard = ({ backdropImg, title, voteAverage, releaseDate, dropDown }: { dropDown?: any, backdropImg: string, title: string, voteAverage: any, releaseDate: any }) => {
     return (
@@ -124,7 +125,11 @@ const CustomDropDownMenu = ({ title }) => {
     )
 }
 
-
+export function SkeletonLoader() {
+    return(
+        <Skeleton className='w-full h-[200px] sm:h-[272px] lg:h-[310px] rounded-xl' />
+    )
+}
 
 
 export default function MovieBackdropCard({ backdropImg, title, voteAverage, releaseDate, adult }: { backdropImg: string, title: string, voteAverage: any, releaseDate: any, adult?: boolean }) {

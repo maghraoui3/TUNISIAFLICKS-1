@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import HorizontalScroller from './custom/HorizontalScroller';
 import { Button } from './ui/button';
 import Link from 'next/link';
+import { Skeleton } from './ui/skeleton';
 
 export default function Genres() {
 
@@ -24,7 +25,11 @@ export default function Genres() {
 
         // genres bar
         <div className='max-w-full grid'>
-            {loader ? <p>Loading...</p> :
+            {loader ? <HorizontalScroller className='flex overflow-hidden'>
+                {Array.from({ length: 13 }).map((_, index) => {
+                    return <Skeleton key={index} className='w-full h-9' />
+                })}
+            </HorizontalScroller> :
                 <HorizontalScroller className='flex overflow-hidden'>
                     {data.map((genre) => {
                         return (

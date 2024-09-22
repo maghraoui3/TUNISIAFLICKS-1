@@ -24,6 +24,13 @@ import { TbMenu2 } from "react-icons/tb";
 
 import { globalStore } from '@/store/store';
 
+import {
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs'
+
 const Navbar = () => {
   const pathname = usePathname();
 
@@ -41,10 +48,9 @@ const Navbar = () => {
 
   const mobileNav = [
     { name: 'Home', href: '/', icon: <GoHome className='text-xl' />, activeIcon: <GoHomeFill className='text-xl text-red-500' /> },
-    { name: 'Movies', href: '/movies', icon: <BiMoviePlay className='text-xl' />, activeIcon: <BiSolidMoviePlay className='text-xl text-red-500' />  },
-    { name: 'Search', href: '/search', icon: <BiSearchAlt2 className='text-xl' />, activeIcon: <BiSolidSearchAlt2 className='text-xl text-red-500' />  },
-    { name: 'TV Shows', href: '/tv', icon: <BiTv className='text-xl' />, activeIcon: <BiSolidTv className='text-xl text-red-500' />  },
-    { name: 'Login', href: '/auth/login', icon: <IoMdLogIn className='text-xl' />, activeIcon: <RiLoginCircleFill className='text-xl text-red-500' /> },
+    { name: 'Movies', href: '/movies', icon: <BiMoviePlay className='text-xl' />, activeIcon: <BiSolidMoviePlay className='text-xl text-red-500' /> },
+    { name: 'Search', href: '/search', icon: <BiSearchAlt2 className='text-xl' />, activeIcon: <BiSolidSearchAlt2 className='text-xl text-red-500' /> },
+    { name: 'TV Shows', href: '/tv', icon: <BiTv className='text-xl' />, activeIcon: <BiSolidTv className='text-xl text-red-500' /> },
   ];
 
   const asideState = globalStore((state: any) => state.fillWithSideBar);
@@ -112,13 +118,14 @@ const Navbar = () => {
               </div>
             </div>
             {/* User Profile or Login Button */}
-            <div className="ml-4 flex items-center sm:ml-6">
-                <Link href="/auth/login">
-                  <p className="text-white bg-red-600 hover:bg-red-400 dark:bg-red-700 dark:hover:bg-red-500 transition-all ease-in-out delay-75 hover:text-white px-3 py-2 rounded-xl text-sm font-medium">
-                    Login
-                  </p>
-                </Link>
-            </div>
+            <SignedOut>
+              <p className="text-white bg-red-600 hover:bg-red-400 dark:bg-red-700 dark:hover:bg-red-500 transition-all ease-in-out delay-75 hover:text-white px-3 py-2 rounded-xl text-sm font-medium">
+                <SignInButton />
+              </p>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </div>
         </div>
 
@@ -131,8 +138,8 @@ const Navbar = () => {
         </div>
       </div>
 
-            {/* Bottom mobile navbar */}
-            <div className="sm:hidden absolute bottom-0 text-white bg-black w-full py-1">
+      {/* Bottom mobile navbar */}
+      <div className="sm:hidden absolute bottom-0 text-white bg-black w-full py-1">
         <ul className='flex justify-evenly'>
           {mobileNav.map((item, index) => {
             const isActive = item.href === "/" ? pathname === item.href : pathname.startsWith(item.href);
@@ -144,6 +151,16 @@ const Navbar = () => {
               </li>
             );
           })}
+          <li className="flex justify-center p-2">
+            <SignedOut>
+              <SignInButton>
+                <IoMdLogIn className='text-xl' />
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </li>
         </ul>
       </div>
     </nav>

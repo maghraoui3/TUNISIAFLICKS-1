@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-
+import {
+  ClerkProvider,
+} from '@clerk/nextjs'
 import { Providers } from './providers'
 
 import Navbar from "@/components/Navbar";
@@ -26,18 +28,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} transition-colors duration-300`}>
-        <Providers>
-          <Navbar />
-          <div className="bg-white text-black flex min-h-screen dark:bg-[#0d0c0f] dark:text-white">
-            <Sidebar />
-            <main role="main" className="flex justify-center p-4 sm:pt-20 pt-14 w-full">
-              {children}
-            </main>
-          </div>
-        </Providers>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body className={`${inter.className} transition-colors duration-300`}>
+          <Providers>
+            <Navbar />
+            <div className="bg-white text-black flex min-h-screen dark:bg-[#0d0c0f] dark:text-white">
+              <Sidebar />
+              <main role="main" className="flex justify-center p-4 sm:pt-20 pt-14 w-full">
+                {children}
+              </main>
+            </div>
+          </Providers>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

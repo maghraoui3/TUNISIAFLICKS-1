@@ -25,13 +25,13 @@ export default function Genres() {
 
         // genres bar
         <div className='max-w-full grid'>
-            {loader ? <HorizontalScroller className='flex overflow-hidden'>
-                {Array.from({ length: 13 }).map((_, index) => {
-                    return <Skeleton key={index} className='w-full h-9' />
-                })}
-            </HorizontalScroller> :
-                <HorizontalScroller className='flex overflow-hidden'>
-                    {data.map((genre) => {
+            <HorizontalScroller className='flex overflow-hidden'>
+                {loader ?
+                    Array.from({ length: 13 }).map((_, index) => {
+                        return <Skeleton key={index} className='w-full h-9' />
+                    })
+                    :
+                    data.map((genre) => {
                         return (
                             <Link href={`/genres/${genre.id}`} key={genre.id} className="">
                                 <Button className="px-4 py-2 bg-zinc-800 text-white hover:bg-zinc-500 rounded-xl">
@@ -40,7 +40,8 @@ export default function Genres() {
                             </Link>
                         );
                     })}
-                </HorizontalScroller>}
+
+            </HorizontalScroller>
         </div>
     )
 }

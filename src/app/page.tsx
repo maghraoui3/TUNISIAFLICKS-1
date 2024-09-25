@@ -1,10 +1,10 @@
-import MainPage from "./MainPage";
+import Movies from "./(movies)/page";
 
 
 export default function Home() {
   return (
     <main className="flex-grow">
-      <MainPage/>
+      <Movies />
     </main>
   );
 }

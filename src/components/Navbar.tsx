@@ -76,7 +76,7 @@ const Navbar = () => {
                       Movies
                     </p>
                   </Link>
-                  <Link href="/about">
+                  <Link href="/tv">
                     <p className="text-gray-300 hover:bg-zinc-700 hover:text-white px-3 py-2 rounded-xl text-sm font-medium">
                       TV Shows
                     </p>

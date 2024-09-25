@@ -22,8 +22,6 @@ export async function fetchMovies(): Promise<{ TrendingMovies, populatMovies, to
     const nowPlayingMovies = await nowPlayingMoviesResponse.json();
     const upcomingMovies = await upcomingMoviesResponse.json();
 
-    revalidatePath("/");
-
     return { TrendingMovies, populatMovies, topRatedMovies, nowPlayingMovies, upcomingMovies };
   } catch (error) {
     console.error("Error fetching data:", error);

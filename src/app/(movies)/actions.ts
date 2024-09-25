@@ -5,11 +5,11 @@ import { revalidatePath } from "next/cache";
 export async function fetchMovies(): Promise<{ TrendingMovies, populatMovies, topRatedMovies, nowPlayingMovies, upcomingMovies }> {
   try {
     const [trendingMoviesResponse, populatMoviesResponse, topRatedMoviesResponse, nowPlayingMoviesResponse, upcomingMoviesResponse] = await Promise.all([
-      fetch("https://api.themoviedb.org/3/trending/movie/day?api_key=b5d2609c326586f7f753f77b085a0b31&language=en-US&page=1"),
-      fetch("https://api.themoviedb.org/3/movie/popular?api_key=b5d2609c326586f7f753f77b085a0b31&language=en-US&page=1"),
-      fetch("https://api.themoviedb.org/3/movie/top_rated?api_key=b5d2609c326586f7f753f77b085a0b31&language=en-US&page=1"),
-      fetch("https://api.themoviedb.org/3/movie/now_playing?api_key=b5d2609c326586f7f753f77b085a0b31&language=en-US&page=1"),
-      fetch("https://api.themoviedb.org/3/movie/upcoming?api_key=b5d2609c326586f7f753f77b085a0b31&language=en-US&page=1"),
+      fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=1`),
+      fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=1`),
+      fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=1`),
+      fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=1`),
+      fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=1`),
     ]);
 
     if (!trendingMoviesResponse.ok || !populatMoviesResponse.ok || !topRatedMoviesResponse.ok || !nowPlayingMoviesResponse.ok || !upcomingMoviesResponse.ok) {

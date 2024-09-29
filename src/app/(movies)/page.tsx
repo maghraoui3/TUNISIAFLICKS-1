@@ -1,13 +1,13 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
 import { FaLongArrowAltRight } from "react-icons/fa"
 import Link from 'next/link'
 import Genres from '@/components/Genres'
-import MoviePosterCard, { SkeletonLoader as PosterSkeletonLoader } from '@/components/MoviePosterCard'
-import MovieBackdropCard, { SkeletonLoader as BackdropSkeletonLoader } from '@/components/MovieBackdropCard'
+import MoviePosterCard from '@/components/MoviePosterCard'
+import MovieBackdropCard from '@/components/MovieBackdropCard'
 import { MoviesState, Movie } from './movieTypes'
 
 interface MoviesClientProps {
@@ -15,21 +15,19 @@ interface MoviesClientProps {
 }
 
 export default function MoviesClient({ initialMovies }: MoviesClientProps) {
-  const [movies] = useState<MoviesState>(initialMovies)
-
   return (
     <div className='w-full'>
       <Genres />
       <br />
-      <TrendingSlider sliderTitle="Trending Movies" movies={movies.TrendingMovies} />
+      <TrendingSlider sliderTitle="Trending Movies" movies={initialMovies.TrendingMovies} />
       <br />
-      <Slider sliderTitle="Popular Movies" movies={movies.popularMovies} />
+      <Slider sliderTitle="Popular Movies" movies={initialMovies.popularMovies} />
       <br />
-      <Slider sliderTitle="Top Rated Movies" movies={movies.topRatedMovies} />
+      <Slider sliderTitle="Top Rated Movies" movies={initialMovies.topRatedMovies} />
       <br />
-      <Slider sliderTitle="Now Playing Movies" movies={movies.nowPlayingMovies} />
+      <Slider sliderTitle="Now Playing Movies" movies={initialMovies.nowPlayingMovies} />
       <br />
-      <Slider sliderTitle="Upcoming Movies" movies={movies.upcomingMovies} />
+      <Slider sliderTitle="Upcoming Movies" movies={initialMovies.upcomingMovies} />
     </div>
   )
 }

@@ -1,10 +1,12 @@
-import Movies from "./(movies)/page";
+import Movies from "@/app/(movies)/page";
+import { fetchMovies } from "./(movies)/actions";
 
 
-export default function Home() {
+export default async function Home() {
+  const movies = await fetchMovies();
   return (
     <main className="flex-grow">
-      <Movies />
+      <Movies initialMovies={movies} />
     </main>
   );
 }

@@ -1,30 +1,42 @@
-"use server";
+'use server'
 
-import { revalidatePath } from "next/cache";
+import { MoviesState } from './movieTypes'
 
-export async function fetchMovies(): Promise<{ TrendingMovies, populatMovies, topRatedMovies, nowPlayingMovies, upcomingMovies }> {
+export async function fetchMovies(): Promise<MoviesState> {
+  const API_KEY = process.env.TMDB_API_KEY
+  if (!API_KEY) {
+    throw new Error("TMDB_API_KEY is not set")
+  }
+
+  const endpoints = [
+    'trending/movie/day',
+    'movie/popular',
+    'movie/top_rated',
+    'movie/now_playing',
+    'movie/upcoming'
+  ]
+
   try {
-    const [trendingMoviesResponse, populatMoviesResponse, topRatedMoviesResponse, nowPlayingMoviesResponse, upcomingMoviesResponse] = await Promise.all([
-      fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=1`),
-      fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=1`),
-      fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=1`),
-      fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=1`),
-      fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=1`),
-    ]);
+    const responses = await Promise.all(
+      endpoints.map(endpoint =>
+        fetch(`https://api.themoviedb.org/3/${endpoint}?api_key=${API_KEY}&language=en-US&page=1`)
+      )
+    )
 
-    if (!trendingMoviesResponse.ok || !populatMoviesResponse.ok || !topRatedMoviesResponse.ok || !nowPlayingMoviesResponse.ok || !upcomingMoviesResponse.ok) {
-      throw new Error("Failed to fetch data");
+    const data = await Promise.all(responses.map(res => {
+      if (!res.ok) throw new Error(`API request failed: ${res.statusText}`)
+      return res.json()
+    }))
+
+    return {
+      TrendingMovies: data[0],
+      popularMovies: data[1],
+      topRatedMovies: data[2],
+      nowPlayingMovies: data[3],
+      upcomingMovies: data[4]
     }
-
-    const TrendingMovies = await trendingMoviesResponse.json();
-    const populatMovies = await populatMoviesResponse.json();
-    const topRatedMovies = await topRatedMoviesResponse.json();
-    const nowPlayingMovies = await nowPlayingMoviesResponse.json();
-    const upcomingMovies = await upcomingMoviesResponse.json();
-
-    return { TrendingMovies, populatMovies, topRatedMovies, nowPlayingMovies, upcomingMovies };
   } catch (error) {
-    console.error("Error fetching data:", error);
-    throw new Error("Failed to fetch data");
+    console.error("Error fetching data:", error)
+    throw new Error("Failed to fetch movie data")
   }
 }

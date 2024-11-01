@@ -38,11 +38,12 @@ export async function fetchMovies(): Promise<MoviesState> {
   ];
 
   try {
-    const responses = await Promise.all(
-      endpoints.map(endpoint =>
-        fetch(`https://api.themoviedb.org/3/${endpoint}?api_key=${API_KEY}&language=en-US&page=1`)
-      )
-    );
+    const response1 = await fetch(`https://api.themoviedb.org/3/${endpoints[0]}?api_key=${API_KEY}&language=en-US&page=1`)
+    const response2 = await fetch(`https://api.themoviedb.org/3/${endpoints[1]}?api_key=${API_KEY}&language=en-US&page=1`)
+    const response3 = await fetch(`https://api.themoviedb.org/3/${endpoints[2]}?api_key=${API_KEY}&language=en-US&page=1`)
+    const response4 = await fetch(`https://api.themoviedb.org/3/${endpoints[3]}?api_key=${API_KEY}&language=en-US&page=1`)
+    const response5 = await fetch(`https://api.themoviedb.org/3/${endpoints[4]}?api_key=${API_KEY}&language=en-US&page=1`)
+    const responses = await Promise.all([response1, response2, response3, response4, response5]);
 
     const data = await Promise.all(responses.map(res => {
       if (!res.ok) {

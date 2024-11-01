@@ -16,6 +16,7 @@ interface MoviesClientProps {
 }
 
 export default function MoviesClient({ initialMovies, loader }: MoviesClientProps) {
+  if (!initialMovies) return null
   return (
 
     loader ? <p>loading..</p> :

@@ -19,37 +19,6 @@ function LoadingState() {
   )
 }
 
-// Create the movies display component
-function MoviesDisplay({ movies }: { movies: MoviesState }) {
-  if (!movies) return null
-  
-  return (
-    <div className="space-y-8">
-      {movies.TrendingMovies && (
-        <section>
-          <h2 className="text-2xl font-bold mb-4">Trending Movies</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {movies.TrendingMovies.results.map((movie) => (
-              <div key={movie.id} className="rounded-lg overflow-hidden shadow-lg">
-                <img 
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt={movie.title}
-                  className="w-full h-[300px] object-cover"
-                />
-                <div className="p-4">
-                  <h3 className="font-bold">{movie.title}</h3>
-                  <p className="text-sm text-gray-600">{movie.release_date}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-      {/* Add similar sections for other movie categories */}
-    </div>
-  )
-}
-
 // Main page component
 export default function MoviesPage() {
   const [movies, setMovies] = useState<MoviesState | null>(null)

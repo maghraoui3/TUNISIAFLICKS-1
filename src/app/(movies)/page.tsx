@@ -12,15 +12,11 @@ import { MoviesState, Movie } from './movieTypes'
 
 interface MoviesClientProps {
   initialMovies: MoviesState
-  loader: boolean;
 }
 
-export default function MoviesClient({ initialMovies, loader }: MoviesClientProps) {
+export default function MoviesClient({ initialMovies }: MoviesClientProps) {
   if (!initialMovies) return null
   return (
-
-    loader ? <p>loading..</p> :
-
     <div className='w-full'>
       <Genres />
       <br />
@@ -43,6 +39,7 @@ interface SliderProps {
 }
 
 const TrendingSlider: React.FC<SliderProps> = ({sliderTitle, movies}) => {
+  if (!movies?.results) return null
   return (
     <div className='sm:ml-10'>
       <div className='flex justify-between w-full sm:w-[90%] lg:w-[96%] xl:w-[97%]'>
@@ -76,6 +73,7 @@ const TrendingSlider: React.FC<SliderProps> = ({sliderTitle, movies}) => {
 }
 
 const Slider: React.FC<SliderProps> = ({sliderTitle, movies}) => {
+  if (!movies?.results) return null
   return (
     <div className='sm:ml-10 mt-1'>
       <div className='flex justify-between w-full sm:w-[90%] lg:w-[96%] xl:w-[97%]'>

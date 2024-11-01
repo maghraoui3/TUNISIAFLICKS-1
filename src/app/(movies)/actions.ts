@@ -1,26 +1,6 @@
 'use server'
 
-export interface Movie {
-  id: number
-  title: string
-  backdrop_path: string
-  poster_path: string
-  vote_average: number
-  release_date: string
-  adult: boolean
-}
-
-export interface MovieResponse {
-  results: Movie[]
-}
-
-export interface MoviesState {
-  TrendingMovies?: MovieResponse
-  popularMovies?: MovieResponse
-  topRatedMovies?: MovieResponse
-  nowPlayingMovies?: MovieResponse
-  upcomingMovies?: MovieResponse
-}
+import type { MoviesState } from './types'
 
 export async function fetchMovies(): Promise<MoviesState> {
   const API_KEY = process.env.TMDB_API_KEY
@@ -41,7 +21,7 @@ export async function fetchMovies(): Promise<MoviesState> {
       endpoints.map(endpoint => 
         fetch(
           `https://api.themoviedb.org/3/${endpoint}?api_key=${API_KEY}&language=en-US&page=1`,
-          { next: { revalidate: 3600 } } // Cache for 1 hour
+          { next: { revalidate: 3600 } }
         )
       )
     )

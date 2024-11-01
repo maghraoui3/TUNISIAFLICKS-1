@@ -12,10 +12,14 @@ import { MoviesState, Movie } from './movieTypes'
 
 interface MoviesClientProps {
   initialMovies: MoviesState
+  loader: boolean;
 }
 
-export default function MoviesClient({ initialMovies }: MoviesClientProps) {
+export default function MoviesClient({ initialMovies, loader }: MoviesClientProps) {
   return (
+
+    loader ? <p>loading..</p> :
+
     <div className='w-full'>
       <Genres />
       <br />

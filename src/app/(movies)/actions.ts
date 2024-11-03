@@ -18,7 +18,7 @@ export async function fetchMovies(): Promise<MoviesState> {
 
   try {
     const responses = await Promise.all(
-      endpoints.map(endpoint => 
+      endpoints.map(endpoint =>
         fetch(
           `https://api.themoviedb.org/3/${endpoint}?api_key=${API_KEY}&language=en-US&page=1`,
           { next: { revalidate: 3600 } }

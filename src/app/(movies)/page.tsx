@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
 import { FaLongArrowAltRight } from "react-icons/fa"
@@ -9,26 +9,38 @@ import Genres from '@/components/Genres'
 import MoviePosterCard from '@/components/MoviePosterCard'
 import MovieBackdropCard from '@/components/MovieBackdropCard'
 import { MoviesState, Movie } from './movieTypes'
+import { fetchMovies } from './actions'
 
-interface MoviesClientProps {
-  initialMovies: MoviesState
-}
+export default function MoviesClient() {
 
-export default function MoviesClient({ initialMovies }: MoviesClientProps) {
-  if (!initialMovies) return null
+  const [movies, setMovies] = useState(null);
+  const [loader, setLoader] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const movies = await fetchMovies();
+      setMovies(movies);
+      setLoader(false);
+      console.log("slm", movies);
+    };
+    fetchData();
+  }, []);
+
+
   return (
+    loader ? <p>loading..</p> :
     <div className='w-full'>
       <Genres />
       <br />
-      <TrendingSlider sliderTitle="Trending Movies" movies={initialMovies.TrendingMovies} />
+      <TrendingSlider sliderTitle="Trending Movies" movies={movies.TrendingMovies} />
       <br />
-      <Slider sliderTitle="Popular Movies" movies={initialMovies.popularMovies} />
+      <Slider sliderTitle="Popular Movies" movies={movies.popularMovies} />
       <br />
-      <Slider sliderTitle="Top Rated Movies" movies={initialMovies.topRatedMovies} />
+      <Slider sliderTitle="Top Rated Movies" movies={movies.topRatedMovies} />
       <br />
-      <Slider sliderTitle="Now Playing Movies" movies={initialMovies.nowPlayingMovies} />
+      <Slider sliderTitle="Now Playing Movies" movies={movies.nowPlayingMovies} />
       <br />
-      <Slider sliderTitle="Upcoming Movies" movies={initialMovies.upcomingMovies} />
+      <Slider sliderTitle="Upcoming Movies" movies={movies.upcomingMovies} />
     </div>
   )
 }

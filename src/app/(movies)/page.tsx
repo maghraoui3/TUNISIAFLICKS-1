@@ -9,7 +9,7 @@ import Genres from '@/components/Genres'
 import MoviePosterCard from '@/components/MoviePosterCard'
 import MovieBackdropCard from '@/components/MovieBackdropCard'
 import { MoviesState, Movie } from './movieTypes'
-import { fetchMovies } from './actions'
+import Get from './actions'
 
 export default function MoviesClient() {
 
@@ -18,7 +18,7 @@ export default function MoviesClient() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const movies = await fetchMovies();
+      const movies = await Get();
       setMovies(movies);
       setLoader(false);
       console.log("slm", movies);

@@ -1,8 +1,7 @@
-'use server'
-
+"use server";
 import type { MoviesState } from './types'
 
-export async function fetchMovies(): Promise<MoviesState> {
+export default async function Get(): Promise<MoviesState> {
   const API_KEY = process.env.TMDB_API_KEY
   if (!API_KEY) {
     throw new Error("TMDB_API_KEY is not set")

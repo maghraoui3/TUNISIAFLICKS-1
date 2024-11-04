@@ -8,6 +8,8 @@ import Genres from '@/components/Genres';
 import MoviePosterCard, { SkeletonLoader as PosterSkeletonLoader } from '@/components/MoviePosterCard'
 import MovieBackdropCard, { SkeletonLoader as BackdropSkeletonLoader } from '@/components/MovieBackdropCard';
 import getMovies from './(movies)/actions';
+import routes from '@/routes/client/routes';
+
 
 const SkeletonBigSliders = () => {
   return (
@@ -46,7 +48,7 @@ const BigSliders = ({ data }: { data: any }) => {
               return (
                 <CarouselItem key={movie.id} className="transition-transform ease-in-out duration-400 select-none basis-[300px]
                sm:basis-[400px] my-4 lg:basis-[500px] hover:scale-110 hover:border-2 border-black hover:z-10 pl-0 ml-4 shadow-black shadow-2xl">
-                  <MovieBackdropCard key={movie.id} backdropImg={movie.backdrop_path} voteAverage={movie.vote_average} title={movie.title} releaseDate={movie.release_date} adult={movie.adult} />
+                  <MovieBackdropCard key={movie.id} backdropImg={movie.backdrop_path} voteAverage={movie.vote_average} title={movie.title} releaseDate={movie.release_date} adult={movie.adult} link={routes.movie(movie.id)} />
                 </CarouselItem>
               )
             })}
@@ -110,6 +112,7 @@ export default function MainPage() {
         const moviesData = await getMovies()
         setData(moviesData)
         setLoader(false)
+        console.log(moviesData)
       } catch (error) {
         console.error("Error fetching movies:", error)
         setLoader(false)

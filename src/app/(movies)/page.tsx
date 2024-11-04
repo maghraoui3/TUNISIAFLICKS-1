@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useEffect, useState } from 'react'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
@@ -21,7 +21,6 @@ export default function MoviesClient() {
       const movies = await data.json()
       setMovies(movies);
       setLoader(false);
-      console.log("slm", movies.results);
     };
     fetchData();
   }, []);

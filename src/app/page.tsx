@@ -99,24 +99,7 @@ const SmallSliders = ({ data }: { data: any }) => {
   )
 }
 
-
 export default function MainPage() {
-
-  // const [data, setData] = useState(null);
-  // const [loader, setLoader] = useState(true);
-
-  // useEffect(() => {
-  //   fetch('https://api.themoviedb.org/3/trending/movie/day?api_key=b5d2609c326586f7f753f77b085a0b31&language=en-US&page=1')
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       setData(data);
-  //       setLoader(false);
-  //       console.log(data);
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // }, []);
 
   const [data, setData] = useState(null)
   const [loader, setLoader] = useState(true)
@@ -136,8 +119,6 @@ export default function MainPage() {
     fetchMovies()
   }, [])
 
-
-
   return (
     <div className='w-full'>
       <Genres />
@@ -146,6 +127,12 @@ export default function MainPage() {
         {loader ? <SkeletonBigSliders /> : <BigSliders data={data?.TrendingMovies} />}
         <br />
         {loader ? <SmallSkeleton /> : <SmallSliders data={data?.popularMovies} />}
+        <br />
+        {loader ? <SmallSkeleton /> : <SmallSliders data={data?.topRatedMovies} />}
+        <br />
+        {loader ? <SmallSkeleton /> : <SmallSliders data={data?.nowPlayingMovies} />}
+        <br />
+        {loader ? <SmallSkeleton /> : <SmallSliders data={data?.upcomingMovies} />}
       </div>
     </div >
   )

@@ -139,7 +139,7 @@ const Navbar = () => {
       </div>
 
       {/* Bottom mobile navbar */}
-      <div className="sm:hidden fixed bottom-0 text-white bg-black w-full py-1">
+      <div className="sm:hidden fixed bottom-0 text-white bg-black w-full py-1 z-50">
         <ul className='flex justify-evenly'>
           {mobileNav.map((item, index) => {
             const isActive = item.href === "/" ? pathname === item.href : pathname.startsWith(item.href);

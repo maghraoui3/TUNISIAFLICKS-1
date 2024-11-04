@@ -6,6 +6,25 @@ function Page({params}: {params: {id: string}}) {
   const [data, setData] = useState(null)
   const [loader, setLoader] = useState(true)
 
+  const streamServices = [
+    {
+      // https://www.superembed.stream/#install
+      name: 'MultiEmbed',
+      url: `https://multiembed.mov/?video_id=${params.id}&tmdb=1`
+    },
+    {
+      // https://www.2embed.cc/
+      // https://www.2embed.skin/
+      name: '2embed.cc',
+      url: `https://www.2embed.cc/embed/${params.id}`
+    },
+    {
+      // https://2embed.pro
+      name: '2embed.pro',
+      url: `https://2embed.pro/embed/movie/${params.id}`
+    },
+  ]
+
   useEffect(() => {
     async function fetchMovieData() {
       try {
@@ -20,7 +39,7 @@ function Page({params}: {params: {id: string}}) {
     }
 
     fetchMovieData()
-  }, [])
+  }, [params.id])
   return (
     <div className='w-full'>
       {/* <p>movie Page with id {params.id}</p> */}

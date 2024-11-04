@@ -18,10 +18,11 @@ export default function MoviesClient() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const movies = await Get();
+      const data = await fetch('https://api.themoviedb.org/3/trending/movie/day?api_key=b5d2609c326586f7f753f77b085a0b31&language=en-US&page=1');
+      const movies = await data.json()
       setMovies(movies);
       setLoader(false);
-      console.log("slm", movies);
+      console.log("slm", movies.results);
     };
     fetchData();
   }, []);
@@ -32,15 +33,15 @@ export default function MoviesClient() {
     <div className='w-full'>
       <Genres />
       <br />
-      <TrendingSlider sliderTitle="Trending Movies" movies={movies.TrendingMovies} />
+      <TrendingSlider sliderTitle="Trending Movies" movies={movies} />
       <br />
-      <Slider sliderTitle="Popular Movies" movies={movies.popularMovies} />
+      <Slider sliderTitle="Popular Movies" movies={movies} />
       <br />
-      <Slider sliderTitle="Top Rated Movies" movies={movies.topRatedMovies} />
+      <Slider sliderTitle="Top Rated Movies" movies={movies} />
       <br />
-      <Slider sliderTitle="Now Playing Movies" movies={movies.nowPlayingMovies} />
+      <Slider sliderTitle="Now Playing Movies" movies={movies} />
       <br />
-      <Slider sliderTitle="Upcoming Movies" movies={movies.upcomingMovies} />
+      <Slider sliderTitle="Upcoming Movies" movies={movies} />
     </div>
   )
 }

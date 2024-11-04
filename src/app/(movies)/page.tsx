@@ -8,8 +8,7 @@ import Link from 'next/link'
 import Genres from '@/components/Genres'
 import MoviePosterCard from '@/components/MoviePosterCard'
 import MovieBackdropCard from '@/components/MovieBackdropCard'
-import { MoviesState, Movie } from './movieTypes'
-import Get from './actions'
+import { Movie } from './movieTypes'
 
 export default function MoviesClient() {
 

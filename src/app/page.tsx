@@ -123,7 +123,7 @@ export default function MainPage() {
   }, [])
 
   return (
-    <div className='w-full'>
+    <div className='w-full p-4'>
       <Genres />
       <br />
       <div className='sm:ml-10'>

@@ -11,7 +11,7 @@ export default async function getMovieData(id: string) {
   try {
     const res = await
         fetch(
-            `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`,
+            `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=images,credits,videos`,
         //   `https://api.themoviedb.org/3/?api_key=${API_KEY}&language=en-US&page=1`,
           { next: { revalidate: 3600 } }
     )

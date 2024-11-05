@@ -33,7 +33,7 @@ export default function RootLayout({
             <Navbar />
             <div className="bg-white text-black flex min-h-screen dark:bg-[#0d0c0f] dark:text-white">
               <Sidebar />
-              <main role="main" className="flex justify-center p-4 sm:pt-20 pt-14 w-full">
+              <main role="main" className="flex justify-center sm:pt-20 pt-14 w-full">
                 {children}
               </main>
             </div>

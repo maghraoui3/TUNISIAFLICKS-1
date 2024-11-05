@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import {ClerkProvider} from '@clerk/nextjs'
 import { Providers } from './providers'
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
@@ -39,6 +40,7 @@ export default function RootLayout({
             </div>
           </Providers>
         </body>
+        <SpeedInsights />
       </html>
     </ClerkProvider>
   );

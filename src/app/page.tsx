@@ -87,7 +87,7 @@ const SmallSliders = ({ data }: { data: any }) => {
               return (
                 <CarouselItem key={movie.id} className="transition-transform ease-in-out duration-400 select-none basis-[145px]
                md:basis-[167px] my-4 p-0 ml-4 hover:scale-110 hover:z-10">
-                  <MoviePosterCard key={movie.id} posterImg={movie.poster_path} voteAverage={movie.vote_average} title={movie.title} releaseDate={movie.release_date} adult={movie.adult} />
+                  <MoviePosterCard key={movie.id} posterImg={movie.poster_path} voteAverage={movie.vote_average} title={movie.title} releaseDate={movie.release_date} adult={movie.adult} link={routes.movie(movie.id)} />
                 </CarouselItem>
               )
             })}

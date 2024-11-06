@@ -34,9 +34,9 @@ import { useMediaQuery } from '@/hooks/use-media-query';
 import { Button } from './ui/button';
 import { Skeleton } from './ui/skeleton';
 
-const MovieCard = ({ posterImg, title, voteAverage, releaseDate, dropDown }: { dropDown?: any, posterImg: string, title: string, voteAverage: any, releaseDate: any }) => {
+const MovieCard = ({ posterImg, title, voteAverage, releaseDate, dropDown, link }: { dropDown?: any, posterImg: string, title: string, voteAverage: any, releaseDate: any, link?: string }) => {
     return (
-        <Link href={"/"}>
+        <Link href={link || "/"}>
             <div className='w-full h-[216px] sm:h-[250px] rounded-xl p-0 z-0 relative'
                 style={{
                     backgroundImage: `url(https://image.tmdb.org/t/p/w500${posterImg})`,
@@ -137,19 +137,19 @@ export function SkeletonLoader() {
     )
 }
 
-export default function MoviePosterCard({ posterImg, title, voteAverage, releaseDate, adult }: { dropDown?: any, posterImg: string, title: string, voteAverage: any, releaseDate: any, adult?: boolean }) {
+export default function MoviePosterCard({ posterImg, title, voteAverage, releaseDate, adult, link }: { dropDown?: any, posterImg: string, title: string, voteAverage: any, releaseDate: any, adult?: boolean, link?: string }) {
     const isDesktop = useMediaQuery("(min-width: 640px)")
 
     if (isDesktop) {
         return (
             <CustomContextMenu title={title}>
-                <MovieCard posterImg={posterImg} title={title} voteAverage={voteAverage} releaseDate={releaseDate} />
+                <MovieCard posterImg={posterImg} title={title} voteAverage={voteAverage} releaseDate={releaseDate} link={link} />
             </CustomContextMenu>
         )
     }
     return (
         <div>
-            <MovieCard posterImg={posterImg} dropDown={<CustomDropDownMenu title={title} voteAverage={voteAverage} />} title={title} voteAverage={voteAverage} releaseDate={releaseDate} />
+            <MovieCard posterImg={posterImg} dropDown={<CustomDropDownMenu title={title} voteAverage={voteAverage} />} title={title} voteAverage={voteAverage} releaseDate={releaseDate} link={link} />
         </div>
     )
 }

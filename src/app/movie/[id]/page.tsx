@@ -8,6 +8,12 @@ import useEmblaCarousel from 'embla-carousel-react'
 import Image from 'next/image'
 import './carousel.style.css'
 import { FaHeart } from "react-icons/fa6";
+import { Button } from '@/components/ui/button';
+import { FaPlay } from "react-icons/fa6";
+import { cn } from "@/lib/utils"
+import { FaBookmark } from "react-icons/fa";
+import { FaShareAlt } from "react-icons/fa";
+
 
 
 function Page({ params }: { params: { id: string } }) {
@@ -55,26 +61,47 @@ function Page({ params }: { params: { id: string } }) {
 
     fetchMovieData()
   }, [params.id])
+
+
+  const handleWatchNow = () => {
+    // Implement watch now functionality
+  };
+
+  const handleWatchTrailer = () => {
+    // Implement watch trailer functionality
+  };
+
+  const handleAddToFavorites = () => {
+    // Implement add to favorites functionality
+  };
+
+  const handleSaveForLater = () => {
+    // Implement save for later functionality
+  };
+
+  const handleShare = () => {
+    // Implement share functionality
+  };
+
+
+
   return (
     loader ? <div className='w-full h-96 bg-gray-800 animate-pulse' /> :
       <div className='w-full h-full -mt-6' >
-        {/* <div className='w-full h-[calc(100%-30vh)]'
-          style={{
-            backgroundImage: `url(https://image.tmdb.org/t/p/original${backdrops[0].file_path})`, backgroundPosition: 'top',
-            backgroundSize: 'cover', backgroundRepeat: 'no-repeat'
-          }} /> */}
-        <div className='h-[calc(100%-30vh)] w-full relative'>
-          <EmblaCarousel slides={backdrops} options={OPTIONS} />
-          <div className='absolute bottom-0 h-2/6 w-full' style={{ background: 'linear-gradient(transparent, #0d0c0f)' }}/>
-          <div className='absolute left-0 bottom-0 h-full w-1/2' style={{ background: 'linear-gradient(to left, transparent, #0d0c0f)' }}/>
-          <div className='w-full h-full absolute left-0 bottom-0'/>
+        <div className='h-[calc(100%-20vh)] w-full relative'>
+          <BackdropsCarousel slides={backdrops} options={OPTIONS} />
+          <div className='absolute bottom-0 h-2/6 w-full' style={{ background: 'linear-gradient(transparent, #0d0c0f)' }} />
+          <div className='absolute left-0 bottom-0 h-full w-1/2' style={{ background: 'linear-gradient(to left, transparent, #0d0c0f)' }} />
+          <div className='w-full h-full absolute left-0 bottom-0' />
           <div className='absolute pl-10 top-1/4 w-2/5 h-full'>
-            {/* <Image src={`https://image.tmdb.org/t/p/original${logos[1].file_path}`} className='w-80' width={500} height={100} alt="Movie LOGO" /> */}
-            {logos.length == 0 ? null :
-              <Image src={`https://image.tmdb.org/t/p/original${logos.filter((item) => item.iso_639_1 == 'en' )[0].file_path || logos[0].file_path }`} className='w-80' width={500} height={100} alt="Movie LOGO" />}
+            {
+              logos.length == 0 ?
+                <Image src={`https://image.tmdb.org/t/p/original${data.poster_path}`} className='w-44 rounded-xl' width={500} height={100} alt="Movie LOGO" /> :
+                <Image src={`https://image.tmdb.org/t/p/original${logos.filter((item) => item.iso_639_1 == 'en')[0].file_path || logos[0].file_path}`} className='w-80' width={500} height={100} alt="Movie LOGO" />
+            }
             <p className='flex items-center gap-3 mt-5'>
-              <p><Image src={`https://flagsapi.com/${data.origin_country}/flat/32.png`} width={32} height={32} alt='slm'/></p>
-              <p className='flex gap-1 items-center'><FaHeart className='text-red-500'/><p className='text-red-500 font-bold'>{Math.round(data.vote_average*10)}%</p> Likes</p>
+              <p><Image src={`https://flagsapi.com/${data.origin_country}/flat/32.png`} width={32} height={32} alt='slm' /></p>
+              <p className='flex gap-1 items-center'><FaHeart className='text-red-500' /><p className='text-red-500 font-bold'>{Math.round(data.vote_average * 10)}%</p> Likes</p>
               <p>•</p>
               <p>{data.release_date.substring(0, 4)}</p>
               {
@@ -85,15 +112,44 @@ function Page({ params }: { params: { id: string } }) {
                 </div>
               }
               <p>•</p>
-              <p>{data.genres.map((item, index) => data.genres.length-1 !== index ? item.name + ", " : item.name )}</p>
+              <p>{data.genres.map((item, index) => data.genres.length - 1 !== index ? item.name + ", " : item.name)}</p>
             </p>
-            <p className='mt-3 text-gray-200'>{data.overview}</p>
+            <p className='mt-3 text-gray-300'>{data.overview}</p>
             <div className='mt-3'>
               <p>CASTS:</p>
-              <div></div>
+              <div className='flex gap-2 mt-2 select-none'>
+                {data.credits.cast.slice(0, 8).map((item, index) => (
+                  <div className='flex gap-3 items-center cursor-pointer' key={index}>
+                    <Image src={`https://image.tmdb.org/t/p/w300${item.profile_path}`} title={item.name} className='w-14 h-14 object-cover rounded-full' style={{ objectPosition: '0 30%' }} width={100} height={100} alt={item.name} />
+                  </div>
+                ))}
+                <div className='w-14 h-14 bg-gray-500 bg-opacity-40 border-opacity-70 border-2 border-gray-200 rounded-full text-wrap text-center text-sm flex items-center justify-center cursor-pointer' >
+                  View All
+                </div>
+              </div>
+            </div>
+
+
+            <div className='flex gap-4 mt-5'>
+              <Button onClick={handleWatchNow} className='text-white-500 bg-red-500 hover:bg-red-400'>
+                <FaPlay className="mr-1"/> Watch Now
+              </Button>
+              <Button onClick={handleWatchTrailer} variant='outline' className='border-white bg-transparent'>
+                Watch Trailer
+              </Button>
+              <InteractiveButton clicked={handleAddToFavorites} icon={<FaHeart className='w-5 h-5'/>} title="Add to Favories" titleled="Favorited!"/>
+              <InteractiveButton clicked={handleSaveForLater} icon={<FaBookmark className='w-5 h-5'/>} title="Save for Later" titleled="Saved!"/>
+              <InteractiveButton clicked={handleShare} icon={<FaShareAlt className='w-5 h-5'/>} title="Share" titleled="Shared"/>
             </div>
           </div>
+
         </div>
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
 
         {/* <iframe src={`https://multiembed.mov/?video_id=${params.id}&tmdb=1`} className='w-full h-full' allowFullScreen></iframe> */}
       </div>
@@ -107,10 +163,9 @@ type PropType = {
   options?: EmblaOptionsType
 }
 
-const EmblaCarousel: React.FC<PropType> = (props) => {
+const BackdropsCarousel: React.FC<PropType> = (props) => {
   const { slides, options } = props
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [Autoplay({ delay: 3000 })])
-  // console.log(slides)
   return (
     <section className="embla">
       <div className="embla__viewport" ref={emblaRef}>
@@ -127,6 +182,47 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         </div>
       </div>
     </section>
+  )
+}
+const InteractiveButton = ({icon, title, titleled, clicked}: any) => {
+  const [isFavorite, setIsFavorite] = useState(false)
+  const handleClick = () => {
+    setIsFavorite(!isFavorite)
+    clicked()
+  }
+
+  return (
+    <Button
+      variant="outline"
+      className={cn(
+        "relative overflow-hidden group bg-transparent",
+        "w-10 h-10 rounded-full",
+        "hover:w-40 hover:rounded-full",
+        "transition-all duration-300 ease-in-out",
+        isFavorite ? "bg-red-500 text-primary-foreground hover:bg-red-500" : "bg-transparent hover:text-red-500 border-white hover:bg-transparent"
+      )}
+      onClick={() => handleClick()}
+    >
+      <span className={cn(
+        "absolute inset-y-0 left-0 flex items-center justify-center",
+        "w-10 h-10 transition-all duration-300 ease-in-out",
+        "group-hover:scale-110"
+      )}>
+        <span className={cn(
+            " -ml-[2px]",
+            "transition-all duration-300 ease-in-out",
+            isFavorite ? "fill-primary-foreground" : "stroke-current group-hover:fill-primary"
+          )}>{icon}</span>
+      </span>
+      <span 
+        className={cn(
+          "absolute left-10 opacity-0 transition-all duration-300 ease-in-out whitespace-nowrap",
+          "group-hover:opacity-100"
+        )}
+      >
+        {isFavorite ? titleled : title}
+      </span>
+    </Button>
   )
 }
 

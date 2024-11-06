@@ -5,6 +5,7 @@ import getMovieData from './actions'
 import { EmblaOptionsType } from 'embla-carousel'
 import Autoplay from 'embla-carousel-autoplay'
 import useEmblaCarousel from 'embla-carousel-react'
+import Image from 'next/image'
 import './carousel.style.css'
 
 function Page({ params }: { params: { id: string } }) {
@@ -30,6 +31,7 @@ function Page({ params }: { params: { id: string } }) {
 
   const [data, setData] = useState(null)
   const [backdrops, setBackdrops] = useState([])
+  const [logos, setLogos] = useState([])
   const [loader, setLoader] = useState(true)
 
   const OPTIONS: EmblaOptionsType = { loop: true }
@@ -42,6 +44,7 @@ function Page({ params }: { params: { id: string } }) {
         setLoader(false)
         console.log(moviesData)
         setBackdrops(moviesData.images.backdrops)
+        setLogos(moviesData.images.logos)
       } catch (error) {
         console.error("Error fetching movie:", error)
         setLoader(false)
@@ -61,11 +64,14 @@ function Page({ params }: { params: { id: string } }) {
         <div className='h-[calc(100%-30vh)] w-full relative'>
           <EmblaCarousel slides={backdrops} options={OPTIONS} />
           <div className='absolute bottom-0 h-2/6 w-full' style={{ background: 'linear-gradient(transparent, #0d0c0f)' }}/>
-          <div className='absolute left-0 bottom-0 h-full w-2/6' style={{ background: 'linear-gradient(to left, transparent, #0d0c0f)' }}/>
-          <div className='w-full h-full absolute left-0 bottom-0'></div>
+          <div className='absolute left-0 bottom-0 h-full w-1/2' style={{ background: 'linear-gradient(to left, transparent, #0d0c0f)' }}/>
+          <div className='w-full h-full absolute left-0 bottom-0'/>
+          <div className='absolute pl-10 top-1/4 w-full h-full'>
+            <Image src={`https://image.tmdb.org/t/p/original${logos[1].file_path}`} className='w-80' width={500} height={100} alt="" />
+          </div>
         </div>
 
-        <iframe src={`https://multiembed.mov/?video_id=${params.id}&tmdb=1`} className='w-full h-full' allowFullScreen></iframe>
+        {/* <iframe src={`https://multiembed.mov/?video_id=${params.id}&tmdb=1`} className='w-full h-full' allowFullScreen></iframe> */}
       </div>
   )
 }

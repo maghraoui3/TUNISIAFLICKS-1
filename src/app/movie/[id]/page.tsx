@@ -13,6 +13,7 @@ import { FaPlay } from "react-icons/fa6";
 import { cn } from "@/lib/utils"
 import { FaBookmark } from "react-icons/fa";
 import { FaShareAlt } from "react-icons/fa";
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from '@/components/ui/carousel';
 
 
 
@@ -123,7 +124,7 @@ function Page({ params }: { params: { id: string } }) {
                     <Image src={`https://image.tmdb.org/t/p/w300${item.profile_path}`} title={item.name} className='w-14 h-14 object-cover rounded-full' style={{ objectPosition: '0 30%' }} width={100} height={100} alt={item.name} />
                   </div>
                 ))}
-                <div className='w-14 h-14 bg-gray-500 bg-opacity-40 border-opacity-70 border-2 border-gray-200 rounded-full text-wrap text-center text-sm flex items-center justify-center cursor-pointer' >
+                <div className='w-14 h-14 bg-gray-500 bg-opacity-40 border-opacity-70 border-2 border-gray-200 rounded-full text-wrap text-center text-xs flex items-center justify-center cursor-pointer' >
                   View All
                 </div>
               </div>
@@ -145,11 +146,29 @@ function Page({ params }: { params: { id: string } }) {
 
         </div>
 
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+
+        {/* Recommendations */}
+        {/* https://api.themoviedb.org/3/movie/{movie_id}/recommendations */}
+
+        <div className='flex justify-center'>
+        <Carousel className='w-full sm:w-[90%] lg:w-[96%] xl:w-[90"%]'>
+        <CarouselContent>
+          {
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map((movie) => {
+              return (
+                <CarouselItem key={movie} className="transition-transform ease-in-out duration-400 select-none basis-[145px]
+               md:basis-[167px] my-4 p-0 ml-4 hover:scale-110 hover:z-10">
+                <div className='w-full h-56 bg-red-500 rounded-xl'></div>
+                </CarouselItem>
+              )
+            })}
+        </CarouselContent>
+        <div className='hidden sm:block'>
+          {/* <CarouselPrevious /> */}
+          {/* <CarouselNext /> */}
+        </div>
+      </Carousel>
+      </div>
 
         {/* <iframe src={`https://multiembed.mov/?video_id=${params.id}&tmdb=1`} className='w-full h-full' allowFullScreen></iframe> */}
       </div>

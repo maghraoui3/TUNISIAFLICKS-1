@@ -23,3 +23,25 @@ export default async function getMovieData(id: string) {
     throw error
   }
 }
+
+export async function getSimilarMovieData(id: string) {
+  const API_KEY = process.env.TMDB_API_KEY
+  if (!API_KEY) {
+    throw new Error("TMDB_API_KEY is not set")
+  }
+
+  try {
+    const res = await
+        fetch(
+            `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${API_KEY}`,
+        //   `https://api.themoviedb.org/3/movie/{movie_id}/recommendations`,
+          { next: { revalidate: 3600 } }
+    )
+
+
+    return res.json()
+  } catch (error) {
+    console.error("Error fetching similar movies:", error)
+    throw error
+  }
+}

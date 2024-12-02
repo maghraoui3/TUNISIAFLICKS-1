@@ -96,7 +96,8 @@ const Sidebar = () => {
       }, [asideState]);
 
     return (
-        <div className={`bg-gray-800 text-white w-0 ${asideState ? `w-screen pt-6 ${isOpen ? 'sm:w-64' : 'sm:w-20'}` : isOpen ? 'sm:w-64' : 'sm:w-20'} transition-all absolute sm:relative duration-300 overflow-scroll ease-in-out flex flex-col justify-between dark:bg-black light:text-gray-200 z-30 pt-16 h-screen scroll no-scrollbar`}>
+        <div className={`bg-gray-800 text-white w-0 ${asideState ? `w-screen pt-6 ${isOpen ? 'sm:w-64' : 'sm:w-20'}` : isOpen ? 'sm:w-64' : 'sm:w-20'} transition-all absolute sm:relative duration-300 overflow-scroll ease-in-out z-30 h-screen`}>
+        <div className={`bg-gray-800 text-white w-0 ${asideState ? `w-screen pt-6 ${isOpen ? 'sm:w-64' : 'sm:w-20'}` : isOpen ? 'sm:w-64' : 'sm:w-20'} sm:flex transition-all fixed top-0 left-0 duration-300 overflow-auto ease-in-out flex-col justify-between dark:bg-black light:text-gray-200 z-30 pt-16 h-screen scroll no-scrollbar`}>
             <div className="flex flex-col items-center">
                 <button
                     onClick={toggleSidebar}
@@ -139,6 +140,7 @@ const Sidebar = () => {
                 </div>
             </div>
         </div>
+    </div>
     );
 };
 

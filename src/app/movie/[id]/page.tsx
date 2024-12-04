@@ -129,7 +129,13 @@ function Page({ params }: { params: { id: string } }) {
 
                     <div className='flex flex-col '>
                       <p className='flex flex-col md:flex-row items-center flex-wrap gap-3 '>
-                        <Image src={`https://flagsapi.com/${data.origin_country}/flat/32.png`} width={32} height={32} alt='slm' />
+                        {/* {Array(data.origin_country) ? 'is array' : "Hello"} */}
+                        <div>
+                        {data.origin_country.map((item, index) => (
+                          <Image className='inline-block' key={index} src={`https://flagsapi.com/${item}/flat/32.png`} width={32} height={32} alt={item} />
+                        ))}
+                        </div>
+                        {/* <Image src={`https://flagsapi.com/${data.origin_country[0] || data.origin_country}/flat/32.png`} width={32} height={32} alt='slm' /> */}
                         <p>
                           <p className='flex gap-1 items-center'><FaHeart className='text-red-500' />
                             <p className='text-red-500 font-bold'>{Math.round(data.vote_average * 10)}%</p> Likes</p>
@@ -240,7 +246,7 @@ const SimilarMoviesCarousel = ({ similar }) => {
             {
               similar.results.map((movie) => {
                 return (
-                  <CarouselItem key={movie.id} className="transition-all ease-in-out duration-100 select-none basis-[145px] opacity-1 md:opacity-60
+                  <CarouselItem key={movie.id} className="cursor-pointer transition-all ease-in-out duration-100 select-none basis-[145px] opacity-1 md:opacity-60
                          md:hover:opacity-100 md:basis-[224px] my-4 p-0 ml-4 md:hover:scale-150 md:hover:z-10 md:hover:-translate-y-8 h-60
                          md:hover:mr-16 md:hover:ml-20 flex items-center group">
                     <div className={`w-56 h-32 bg-center bg-no-repeat bg-cover rounded-xl relative`}

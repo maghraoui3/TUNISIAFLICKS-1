@@ -34,7 +34,7 @@ import { useMediaQuery } from '@/hooks/use-media-query';
 import { Button } from './ui/button';
 import { Skeleton } from './ui/skeleton';
 
-const MovieCard = ({ posterImg, title, voteAverage, releaseDate, dropDown, link }: { dropDown?: any, posterImg: string, title: string, voteAverage: any, releaseDate: any, link?: string }) => {
+export const MovieCard = ({ posterImg, title, voteAverage, releaseDate, dropDown, link }: { dropDown?: any, posterImg: string, title: string, voteAverage: any, releaseDate: any, link?: string }) => {
     return (
         <Link href={link || "/"}>
             <div className='w-full h-[216px] sm:h-[250px] rounded-xl p-0 z-0 relative'

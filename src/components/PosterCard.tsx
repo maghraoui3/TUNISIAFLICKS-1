@@ -7,10 +7,15 @@ export default function PosterCard({ posterImg, title, voteAverage, releaseDate,
   return (
             <Link href={link || "/"}>
                 <div className='w-[150px] h-[196px] sm:w-[170px] sm:h-[225px]  rounded-xl p-0 z-0 relative'
-                    style={{
+                    style={posterImg ? {
                         backgroundImage: `url(https://image.tmdb.org/t/p/w500${posterImg})`,
                         backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'
-                    }} >
+                    }:
+                    {
+                        backgroundImage: "url('/404Poster')",
+                        backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'
+                    }
+                    } >
                     <div className='absolute left-0 top-0 w-full h-[216px] sm:h-[250px] z-10 bg-black opacity-10 transition-opacity ease-in-out duration-700 hover:opacity-0' />
                     {dropDown
                         ? <div className='absolute z-50 left-0 top-0 scale-50 sm:scale-100'>

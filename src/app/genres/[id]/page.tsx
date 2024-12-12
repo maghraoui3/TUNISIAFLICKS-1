@@ -1,7 +1,9 @@
 "use client";
-import MoviePosterCard from '@/components/MoviePosterCard';
+// import MoviePosterCard from '@/components/MoviePosterCard';
 import React, { useState, useEffect } from 'react'
 import PaginationComponent from '@/components/PaginationComponent';
+import PosterCard from '@/components/PosterCard'
+import routes from '@/routes/client/routes';
 
 export default function Page({ params }: { params: { id: string } }) {
 
@@ -36,17 +38,31 @@ export default function Page({ params }: { params: { id: string } }) {
     return (
         loader
             ? <p>Loading...</p>
-            : <div className='w-full'>
-                <p className='my-3 text-xl'>Genres</p>
-                <div className='flex w-full flex-wrap'>
-                    {data.map((movie) => <MoviePosterCard key={movie.id} posterImg={movie.poster_path} voteAverage={movie.vote_average} title={movie.title} releaseDate={movie.release_date} adult={movie.adult} />)}
+            : <div className='flex flex-col items-center justify-center'>
+                <div className='ml-2'>
+                    <p className='my-3 text-xl ml-5'>Genres</p> {/* Aligns with the card container */}
+                    <div className="mt-5 w-fit">
+                        <div className='flex gap-4 flex-wrap justify-start mx-5 w-fit'>
+                            {data.map((item, index) => (
+                                <PosterCard
+                                    key={index}
+                                    posterImg={item.poster_path || item.backdrop_path || '/404Poster'}
+                                    title={item.title || item.original_title}
+                                    voteAverage={item.vote_average || 0}
+                                    releaseDate={item.release_date || '..........'}
+                                    link={routes.movie(item.id)}
+                                />
+                            ))}
+                        </div>
+                    </div>
                 </div>
-                <PaginationComponent
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={handlePageChange}
-                    maxVisiblePages={5}
-                />
+
+                {/* Pagination */}
+                {data.length > 0 && (
+                    <div className="mt-8 mb-4">
+                        <PaginationComponent currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+                    </div>
+                )}
             </div>
     )
 }

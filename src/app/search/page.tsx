@@ -4,19 +4,10 @@ import { searchMovies } from './actions';
 import PosterCard from '@/components/PosterCard'
 import routes from '@/routes/client/routes';
 
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination"
 import PaginationComponent from '@/components/PaginationComponent';
 
-export default function Page() {
-  const [query, setQuery] = useState("");
+export default function Page({searchParams}) {
+  const [query, setQuery] = useState(searchParams.q || "");
   const [data, setData] = useState({});
   const [results, setResults] = useState([]);
   const [loader, setLoader] = useState(true);
@@ -80,18 +71,22 @@ export default function Page() {
                 placeholder="Search"
                 autoComplete="off"
                 type="search"
+                value={query}
                 onChange={(e) => setQuery(e.target.value)}
+                autoFocus={true}
               />
             </div>
           </div>
         </div>
         {/* Content */}
-        <div className="mt-5">
-          <div className='flex gap-4 flex-wrap justify-center mx-5 '>
-          {results.map( (item, index) => (
-              <PosterCard key={index} posterImg={item.poster_path || item.backdrop_path} title={item.title || item.original_title} voteAverage={item.vote_average || 0} releaseDate={item.release_date || '..........'} link={routes.movie(item.id)} />
-          ) )}
-          </div>
+        <div className='flex flex-col items-center justify-center mt-5'>
+              <div className='flex gap-4 flex-wrap justify-start mx-5 w-fit'>
+                {results.map((item, index) => (
+                  <PosterCard
+                    key={index} posterImg={item.poster_path || item.backdrop_path} title={item.title || item.original_title} voteAverage={item.vote_average || 0} releaseDate={item.release_date || '..........'} link={routes.movie(item.id)}
+                  />
+                ))}
+            </div>
         </div>
       </div>
 

@@ -112,7 +112,7 @@ const SearchBar = () => {
                             <ul className="text-white">
                                 {results.length > 0 ? (
                                     results.map((item, index) => (
-                                        <Link key={index} href={routes.movie(item.id)}>
+                                        <Link key={index} href={item.media_type === "movie" ? routes.movie(item.id) : routes.tvShow(item.id)}>
                                             <li className="p-3 hover:bg-gray-700 dark:hover:bg-zinc-900 flex gap-5">
                                                 <Image 
                                                     src={`https://image.tmdb.org/t/p/w300/${item.poster_path || item.backdrop_path}` || "/404Poster"} 

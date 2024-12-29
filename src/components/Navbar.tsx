@@ -24,12 +24,6 @@ import { TbMenu2 } from "react-icons/tb";
 
 import { globalStore } from '@/store/store';
 
-import {
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton
-} from '@clerk/nextjs'
 import SearchBar from './SearchBar';
 
 const Navbar = () => {
@@ -64,7 +58,7 @@ const Navbar = () => {
       <div className="bg-gray-800 text-black shadow-md dark:shadow-none shadow-slate-800 fixed top-0 left-0 right-0 z-40 dark:bg-black dark:text-gray-200 dark:border-b-2 dark:border-gray-900">
         <div className="hidden sm:flex mx-auto px-2 sm:px-6 lg:px-8 justify-center">
           <div className="relative flex w-full items-center justify-between h-16 max-w-[2000px]">
-            <div className="flex items-center">
+            <div className="flex items-center mt">
               {/* Logo */}
               <Link href="/">
                 <p className="flex-shrink-0">
@@ -75,12 +69,12 @@ const Navbar = () => {
               <div className="hidden sm:block sm:ml-6">
                 <div className="flex space-x-4">
                   <Link href="/">
-                    <p className="text-red-500 hover:bg-zinc-700 hover:text-white px-3 py-2 rounded-xl text-sm font-medium">
+                    <p className={`${pathname == "/" ? "text-red-500" : ""} hover:bg-zinc-700 hover:text-white px-3 py-2 rounded-xl text-sm font-medium`}>
                       Movies
                     </p>
                   </Link>
                   <Link href="/tv">
-                    <p className="text-gray-300 hover:bg-zinc-700 hover:text-white px-3 py-2 rounded-xl text-sm font-medium">
+                    <p className={`${pathname.startsWith("/tv") ? "text-red-500" : ""} text-gray-300 hover:bg-zinc-700 hover:text-white px-3 py-2 rounded-xl text-sm font-medium`}>
                       TV Shows
                     </p>
                   </Link>
@@ -88,16 +82,9 @@ const Navbar = () => {
               </div>
             </div>
             {/* Search Bar */}
-            {!pathname.startsWith("/search") ? <SearchBar/> : null}
+            {!pathname.startsWith("/search") ? <SearchBar /> : null}
             {/* User Profile or Login Button */}
-            <SignedOut>
-              <p className="text-white bg-red-600 hover:bg-red-400 dark:bg-red-700 dark:hover:bg-red-500 transition-all ease-in-out delay-75 hover:text-white px-3 py-2 rounded-xl text-sm font-medium">
-                <SignInButton />
-              </p>
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
+
           </div>
         </div>
 
@@ -124,14 +111,7 @@ const Navbar = () => {
             );
           })}
           <li className="flex justify-center p-2">
-            <SignedOut>
-              <SignInButton>
-                <IoMdLogIn className='text-xl' />
-              </SignInButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
+
           </li>
         </ul>
       </div>

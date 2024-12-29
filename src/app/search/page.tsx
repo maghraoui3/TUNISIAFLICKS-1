@@ -83,7 +83,7 @@ export default function Page({searchParams}) {
               <div className='flex gap-4 flex-wrap justify-start mx-5 w-fit'>
                 {results.map((item, index) => (
                   <PosterCard
-                    key={index} posterImg={item.poster_path || item.backdrop_path} title={item.title || item.original_title} voteAverage={item.vote_average || 0} releaseDate={item.release_date || '..........'} link={routes.movie(item.id)}
+                    key={index} posterImg={item.poster_path || item.backdrop_path } title={item.title || item.original_title} voteAverage={item.vote_average || 0} releaseDate={item.release_date || '..........'} link={item.media_type === "movie" ? routes.movie(item.id) : routes.tvShow(item.id)}
                   />
                 ))}
             </div>

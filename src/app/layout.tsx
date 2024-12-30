@@ -63,6 +63,7 @@ export const metadata: Metadata = {
     creator: '@TunisiaFlicks',
     images: ['https://tunisiaflicks.vercel.app/og-image.png'],
   },
+
   viewport: {
     width: 'device-width',
     initialScale: 1,
@@ -74,22 +75,12 @@ export const metadata: Metadata = {
     yahoo: 'your-yahoo-verification',
     other: {
       me: ['malek.magraoui3@gmail.com', 'https://malek-maghraoui.netlify.app'],
+      'telegram-channel': '@TunisiaFlicks',
     },
   },
   category: 'Entertainment',
 };
 
-
-// export const metadata: Metadata = {
-//   title: "TunisiaFlicks",
-//   description: "Welcome to TunisiaFlicks, your premier destination for streaming movies and TV shows.",
-//   openGraph: {
-//     title: "TunisiaFlicks",
-//     description: "Stream movies and TV shows for free.",
-//     type: 'website',
-//     url: 'https://tunisiaflicks.vercel.app',
-//   }
-// };
 
 export default function RootLayout({
   children,
@@ -97,20 +88,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <html lang="en" suppressHydrationWarning>
-        <body className={`${inter.className} transition-colors duration-300`}>
-          <Providers>
-            <Navbar />
-            <div className="bg-white text-black flex min-h-screen dark:bg-[#0d0c0f] dark:text-white">
-              <Sidebar />
-              <main role="main" className="flex justify-center sm:pt-20 pt-14 w-full">
-                {children}
-              </main>
-            </div>
-          </Providers>
-        </body>
-        <SpeedInsights />
-        <Analytics />
-      </html>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Telegram-specific meta tags */}
+        <meta property="telegram:channel" content="@TunisiaFlicks" />
+      </head>
+      <body className={`${inter.className} transition-colors duration-300`}>
+        <Providers>
+          <Navbar />
+          <div className="bg-white text-black flex min-h-screen dark:bg-[#0d0c0f] dark:text-white">
+            <Sidebar />
+            <main role="main" className="flex justify-center sm:pt-20 pt-14 w-full">
+              {children}
+            </main>
+          </div>
+        </Providers>
+      </body>
+      <SpeedInsights />
+      <Analytics />
+    </html>
   );
 }

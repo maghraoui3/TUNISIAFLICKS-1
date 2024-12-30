@@ -99,6 +99,7 @@ export default function RootLayout({
         <meta property="og:url" content="https://tunisiaflicks.vercel.app" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="TunisiaFlicks" />
+        <meta name="google-site-verification" content="aXq6rN-W2lrmjvTfoy1CJUXSmrurfBgJ0wMOR_fQUOU" />
       </head>
       <body className={`${inter.className} transition-colors duration-300`}>
         <Providers>

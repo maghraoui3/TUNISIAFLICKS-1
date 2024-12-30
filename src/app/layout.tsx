@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://www.tunisiaflicks.vercel.app'),
+  metadataBase: new URL('https://tunisiaflicks.vercel.app'),
   alternates: {
     canonical: '/',
     languages: {
@@ -33,11 +33,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'TunisiaFlicks',
     description: 'Stream the latest movies and TV shows for free, without ads, on TunisiaFlicks.',
-    url: 'https://www.tunisiaflicks.vercel.app',
+    url: 'https://tunisiaflicks.vercel.app',
     siteName: 'TunisiaFlicks',
     images: [
       {
-        url: 'https://www.tunisiaflicks.vercel.app/og-image.png',
+        url: 'https://tunisiaflicks.vercel.app/og-image.png',
         width: 1080,
         height: 1080,
       },
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     title: 'TunisiaFlicks',
     description: 'Watch the latest movies and TV shows for free with no ads on TunisiaFlicks.',
     creator: '@TunisiaFlicks',
-    images: ['https://www.tunisiaflicks.vercel.app/og-image.png'],
+    images: ['https://tunisiaflicks.vercel.app/og-image.png'],
   },
   viewport: {
     width: 'device-width',
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
 //     title: "TunisiaFlicks",
 //     description: "Stream movies and TV shows for free.",
 //     type: 'website',
-//     url: 'https://www.tunisiaflicks.vercel.app',
+//     url: 'https://tunisiaflicks.vercel.app',
 //   }
 // };
 

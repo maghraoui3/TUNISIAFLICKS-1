@@ -11,15 +11,85 @@ import Sidebar from "@/components/Sidebar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "TunisiaFlicks",
-  description: "Welcome to TunisiaFlicks, your premier destination for streaming movies and TV shows.",
+  title: 'TunisiaFlicks',
+  description: 'Stream the latest movies and TV shows for free with no ads, powered by cutting-edge technology for the best viewing experience.',
+  keywords: ['Free Movies', 'Free Streaming', 'No Ads', 'Latest Movies', 'TV Shows', 'Streaming Service', 'TunisiaFlicks'],
+  authors: [{ name: 'TunisiaFlicks Team' }],
+  creator: 'TunisiaFlicks Team',
+  publisher: 'TunisiaFlicks',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL('https://www.tunisiaflicks.vercel.app'),
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en-US': '/en-US',
+      'ar-TN': '/ar-TN',
+    },
+  },
   openGraph: {
-    title: "TunisiaFlicks",
-    description: "Stream movies and TV shows for free.",
+    title: 'TunisiaFlicks',
+    description: 'Stream the latest movies and TV shows for free, without ads, on TunisiaFlicks.',
+    url: 'https://www.tunisiaflicks.vercel.app',
+    siteName: 'TunisiaFlicks',
+    images: [
+      {
+        url: 'https://www.tunisiaflicks.vercel.app/og-image.png',
+        width: 1080,
+        height: 1080,
+      },
+    ],
+    locale: 'en_US',
     type: 'website',
-    url: 'https://www.tunisiaflicks.com',
-  }
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'TunisiaFlicks',
+    description: 'Watch the latest movies and TV shows for free with no ads on TunisiaFlicks.',
+    creator: '@TunisiaFlicks',
+    images: ['https://www.tunisiaflicks.vercel.app/og-image.png'],
+  },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+  },
+  verification: {
+    google: 'your-google-site-verification',
+    yandex: 'your-yandex-verification',
+    yahoo: 'your-yahoo-verification',
+    other: {
+      me: ['malek.magraoui3@gmail.com', 'https://malek-maghraoui.netlify.app'],
+    },
+  },
+  category: 'Entertainment',
 };
+
+
+// export const metadata: Metadata = {
+//   title: "TunisiaFlicks",
+//   description: "Welcome to TunisiaFlicks, your premier destination for streaming movies and TV shows.",
+//   openGraph: {
+//     title: "TunisiaFlicks",
+//     description: "Stream movies and TV shows for free.",
+//     type: 'website',
+//     url: 'https://www.tunisiaflicks.vercel.app',
+//   }
+// };
 
 export default function RootLayout({
   children,

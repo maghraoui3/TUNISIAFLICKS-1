@@ -25,6 +25,7 @@ import { TbMenu2 } from "react-icons/tb";
 import { globalStore } from '@/store/store';
 
 import SearchBar from './SearchBar';
+import { Button } from './ui/button';
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -46,6 +47,7 @@ const Navbar = () => {
     { name: 'Movies', href: '/movies', icon: <BiMoviePlay className='text-xl' />, activeIcon: <BiSolidMoviePlay className='text-xl text-red-500' /> },
     { name: 'Search', href: '/search', icon: <BiSearchAlt2 className='text-xl' />, activeIcon: <BiSolidSearchAlt2 className='text-xl text-red-500' /> },
     { name: 'TV Shows', href: '/tv', icon: <BiTv className='text-xl' />, activeIcon: <BiSolidTv className='text-xl text-red-500' /> },
+    { name: 'Login', href: '/login', icon: <IoMdLogIn className='text-xl' />, activeIcon: <RiLoginCircleFill className='text-xl text-red-500' /> },
   ];
 
   const asideState = globalStore((state: any) => state.fillWithSideBar);
@@ -84,6 +86,7 @@ const Navbar = () => {
             {/* Search Bar */}
             {!pathname.startsWith("/search") ? <SearchBar /> : null}
             {/* User Profile or Login Button */}
+            <Button variant='default' className='bg-red-500 text-white'>Login</Button>
 
           </div>
         </div>
@@ -110,9 +113,6 @@ const Navbar = () => {
               </li>
             );
           })}
-          <li className="flex justify-center p-2">
-
-          </li>
         </ul>
       </div>
     </nav>

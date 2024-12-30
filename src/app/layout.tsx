@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter } from 'next/font/google';
 import "./globals.css";
 import { Providers } from './providers'
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -31,15 +31,16 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'TunisiaFlicks',
-    description: 'Stream the latest movies and TV shows for free, without ads, on TunisiaFlicks.',
+    title: 'TunisiaFlicks - Free Movies and TV Shows',
+    description: 'Stream the latest movies and TV shows for free, without ads, on TunisiaFlicks. High-quality entertainment at your fingertips.',
     url: 'https://tunisiaflicks.vercel.app',
     siteName: 'TunisiaFlicks',
     images: [
       {
         url: 'https://tunisiaflicks.vercel.app/og-image.png',
-        width: 1080,
-        height: 1080,
+        width: 1200,
+        height: 630,
+        alt: 'TunisiaFlicks - Free Streaming Service',
       },
     ],
     locale: 'en_US',
@@ -63,7 +64,6 @@ export const metadata: Metadata = {
     creator: '@TunisiaFlicks',
     images: ['https://tunisiaflicks.vercel.app/og-image.png'],
   },
-
   viewport: {
     width: 'device-width',
     initialScale: 1,
@@ -75,12 +75,13 @@ export const metadata: Metadata = {
     yahoo: 'your-yahoo-verification',
     other: {
       me: ['malek.magraoui3@gmail.com', 'https://malek-maghraoui.netlify.app'],
-      'telegram-channel': '@TunisiaFlicks',
     },
   },
   category: 'Entertainment',
+  other: {
+    'telegram-channel': '@TunisiaFlicks',
+  },
 };
-
 
 export default function RootLayout({
   children,
@@ -90,8 +91,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Telegram-specific meta tags */}
-        <meta property="telegram:channel" content="@TunisiaFlicks" />
+        <meta property="og:title" content="TunisiaFlicks - Free Movies and TV Shows" />
+        <meta property="og:description" content="Stream the latest movies and TV shows for free, without ads, on TunisiaFlicks. High-quality entertainment at your fingertips." />
+        <meta property="og:image" content="https://tunisiaflicks.vercel.app/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:url" content="https://tunisiaflicks.vercel.app" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="TunisiaFlicks" />
       </head>
       <body className={`${inter.className} transition-colors duration-300`}>
         <Providers>
@@ -103,9 +110,10 @@ export default function RootLayout({
             </main>
           </div>
         </Providers>
+        <SpeedInsights />
+        <Analytics />
       </body>
-      <SpeedInsights />
-      <Analytics />
     </html>
   );
 }
+

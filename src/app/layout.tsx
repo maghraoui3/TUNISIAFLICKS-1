@@ -4,9 +4,9 @@ import "./globals.css";
 import { Providers } from './providers'
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/react';
-
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
+import { SessionProvider } from "@/components/SessionProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -102,15 +102,17 @@ export default function RootLayout({
         <meta name="google-site-verification" content="aXq6rN-W2lrmjvTfoy1CJUXSmrurfBgJ0wMOR_fQUOU" />
       </head>
       <body className={`${inter.className} transition-colors duration-300`}>
-        <Providers>
-          <Navbar />
-          <div className="bg-white text-black flex min-h-screen dark:bg-[#0d0c0f] dark:text-white">
-            <Sidebar />
-            <main role="main" className="flex justify-center sm:pt-20 pt-14 w-full">
-              {children}
-            </main>
-          </div>
-        </Providers>
+        <SessionProvider>
+          <Providers>
+            <Navbar />
+            <div className="bg-white text-black flex min-h-screen dark:bg-[#0d0c0f] dark:text-white">
+              <Sidebar />
+              <main role="main" className="flex justify-center sm:pt-20 pt-14 w-full">
+                {children}
+              </main>
+            </div>
+          </Providers>
+        </SessionProvider>
         <SpeedInsights />
         <Analytics />
       </body>

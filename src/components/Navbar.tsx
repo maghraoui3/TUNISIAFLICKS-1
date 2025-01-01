@@ -3,32 +3,35 @@
 import React, { useContext, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-
+import { redirect, usePathname } from 'next/navigation';
+import { useSession, signOut } from 'next-auth/react';
 import { IoMdLogIn } from "react-icons/io";
 import { RiLoginCircleFill } from "react-icons/ri";
-
 import { BiSearchAlt2 } from "react-icons/bi";
 import { BiSolidSearchAlt2 } from "react-icons/bi";
-
 import { GoHome } from "react-icons/go";
 import { GoHomeFill } from "react-icons/go";
-
 import { BiMoviePlay } from "react-icons/bi";
 import { BiSolidMoviePlay } from "react-icons/bi";
-
 import { BiTv } from "react-icons/bi";
 import { BiSolidTv } from "react-icons/bi";
-
 import { TbMenu2 } from "react-icons/tb";
-
 import { globalStore } from '@/store/store';
-
 import SearchBar from './SearchBar';
 import { Button } from './ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 const Navbar = () => {
   const pathname = usePathname();
+  const { data: session } = useSession();
 
   useEffect(() => {
     const handleContextMenu = (event) => {
@@ -47,13 +50,10 @@ const Navbar = () => {
     { name: 'Movies', href: '/movies', icon: <BiMoviePlay className='text-xl' />, activeIcon: <BiSolidMoviePlay className='text-xl text-red-500' /> },
     { name: 'Search', href: '/search', icon: <BiSearchAlt2 className='text-xl' />, activeIcon: <BiSolidSearchAlt2 className='text-xl text-red-500' /> },
     { name: 'TV Shows', href: '/tv', icon: <BiTv className='text-xl' />, activeIcon: <BiSolidTv className='text-xl text-red-500' /> },
-    { name: 'Login', href: '/login', icon: <IoMdLogIn className='text-xl' />, activeIcon: <RiLoginCircleFill className='text-xl text-red-500' /> },
   ];
 
   const asideState = globalStore((state: any) => state.fillWithSideBar);
   const updateAsideState = globalStore((state: any) => state.setFillWithSideBar);
-
-
 
   return (
     <nav>
@@ -86,8 +86,27 @@ const Navbar = () => {
             {/* Search Bar */}
             {!pathname.startsWith("/search") ? <SearchBar /> : null}
             {/* User Profile or Login Button */}
-            <Button variant='default' className='bg-red-500 text-white'>Login</Button>
-
+            {session ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Avatar>
+                    <AvatarImage src={session.user?.image || ''} />
+                    <AvatarFallback>{session.user?.name?.charAt(0) || 'U'}</AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => redirect('/profile')}>Profile</DropdownMenuItem>
+                  <DropdownMenuItem>Settings</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => signOut()}>Log out</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link href="/login">
+                <Button variant='default' className='bg-red-500 text-white'>Login</Button>
+              </Link>
+            )}
           </div>
         </div>
 
@@ -113,6 +132,31 @@ const Navbar = () => {
               </li>
             );
           })}
+          {session ? (
+            <li className="flex justify-center p-2">
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Avatar>
+                    <AvatarImage src={session.user?.image || ''} />
+                    <AvatarFallback>{session.user?.name?.charAt(0) || 'U'}</AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>Profile</DropdownMenuItem>
+                  <DropdownMenuItem>Settings</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => signOut()}>Log out</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </li>
+          ) : (
+            <li className="flex justify-center p-2">
+              <Link href="/login">
+                <IoMdLogIn className='text-xl' />
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </nav>
@@ -120,3 +164,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

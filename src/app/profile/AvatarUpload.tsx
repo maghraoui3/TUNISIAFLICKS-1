@@ -1,13 +1,13 @@
 "use client"
 
 import { useState, useRef } from "react"
-import { Button } from "@/components/ui/button"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { Slider } from "@/components/ui/slider"
+import { Button } from "@/src/components/ui/button"
+import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/src/components/ui/dialog"
+import { Slider } from "@/src/components/ui/slider"
 import AvatarEditor from "react-avatar-editor"
 import { updateAvatar } from "./actions"
-import { toast } from "@/hooks/use-toast"
+import { toast } from "@/src/hooks/use-toast"
 
 export default function AvatarUpload({ user }) {
   const [image, setImage] = useState(null)

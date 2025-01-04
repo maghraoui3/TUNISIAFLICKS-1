@@ -1,8 +1,8 @@
 'use client';
 import React, { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
-import { searchMovies } from '@/app/search/actions';
-import routes from '@/routes/client/routes';
+import { searchMovies } from '@//src/app/search/actions';
+import routes from '@/src/routes/client/routes';
 import Image from "next/image";
 import Link from "next/link";
 

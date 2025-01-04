@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { redirect, usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
 import { IoMdLogIn } from "react-icons/io";
-import { RiLoginCircleFill } from "react-icons/ri";
+// import { RiLoginCircleFill } from "react-icons/ri";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { BiSolidSearchAlt2 } from "react-icons/bi";
 import { GoHome } from "react-icons/go";
@@ -16,7 +16,7 @@ import { BiSolidMoviePlay } from "react-icons/bi";
 import { BiTv } from "react-icons/bi";
 import { BiSolidTv } from "react-icons/bi";
 import { TbMenu2 } from "react-icons/tb";
-import { globalStore } from '@/store/store';
+import { globalStore } from '@/src/store/store';
 import SearchBar from './SearchBar';
 import { Button } from './ui/button';
 import {
@@ -26,8 +26,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+} from "@/src/components/ui/dropdown-menu"
+import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar"
 
 const Navbar = () => {
   const pathname = usePathname();

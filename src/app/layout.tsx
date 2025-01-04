@@ -4,9 +4,9 @@ import "./globals.css";
 import { Providers } from './providers'
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/react';
-import Navbar from "@/components/Navbar";
-import Sidebar from "@/components/Sidebar";
-import { SessionProvider } from "@/components/SessionProvider";
+import Navbar from "@/src/components/Navbar";
+import Sidebar from "@/src/components/Sidebar";
+import { SessionProvider } from "@/src/components/SessionProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 

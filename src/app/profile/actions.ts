@@ -1,8 +1,8 @@
 "use server"
 
 import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/pages/api/auth/[...nextauth]"
-import clientPromise from "@/lib/mongodb"
+import { authOptions } from "@/src/pages/api/auth/[...nextauth]"
+import clientPromise from "@/src/lib/mongodb"
 import { ObjectId } from "mongodb"
 
 export async function updateProfile(data) {

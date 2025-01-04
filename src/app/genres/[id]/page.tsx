@@ -1,9 +1,9 @@
 "use client";
 // import MoviePosterCard from '@/components/MoviePosterCard';
 import React, { useState, useEffect } from 'react'
-import PaginationComponent from '@/components/PaginationComponent';
-import PosterCard from '@/components/PosterCard'
-import routes from '@/routes/client/routes';
+import PaginationComponent from '@/src/components/PaginationComponent';
+import PosterCard from '@/src/components/PosterCard'
+import routes from '@/src/routes/client/routes';
 
 export default function Page({ params }: { params: { id: string } }) {
 

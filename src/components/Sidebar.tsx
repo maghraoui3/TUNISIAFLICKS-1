@@ -9,7 +9,7 @@ import { MdHome, MdOutlineHome, MdExplore, MdOutlineExplore, MdGroup, MdOutlineG
 import { useTheme } from 'next-themes'
 import { FiSun, FiMoon } from "react-icons/fi"
 
-import { globalStore } from '@/store/store';
+import { globalStore } from '@/src/store/store';
 
 const Sidebar = () => {
     const pathname = usePathname();

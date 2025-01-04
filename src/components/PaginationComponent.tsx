@@ -9,8 +9,8 @@ import {
     PaginationLink,
     PaginationNext,
     PaginationPrevious,
-} from "@/components/ui/pagination";
-import { useMediaQuery } from '@/hooks/use-media-query';
+} from "@/src/components/ui/pagination";
+import { useMediaQuery } from '@/src/hooks/use-media-query';
 
 interface PaginationComponentProps {
     currentPage: number;

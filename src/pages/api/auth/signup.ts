@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import clientPromise from '@/lib/mongodb'
+import clientPromise from '@/src/lib/mongodb'
 import { hash } from 'bcrypt'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

@@ -1,41 +1,35 @@
 'use client'
 
 import { useEffect } from 'react'
+import { Button } from "@/src/components/ui/button"
 import { useRouter } from 'next/navigation'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 
 export default function AuthError({
-  error = "An error occurred during authentication",
-  status = 400,
+  error,
+  reset,
 }: {
-  error?: string
-  status?: number
+  error: Error & { digest?: string }
+  reset: () => void
 }) {
   const router = useRouter()
 
   useEffect(() => {
-    if (status === 401) {
-      setTimeout(() => {
-        router.push('/login')
-      }, 5000)
-    }
-  }, [router, status])
+    // Log the error to an error reporting service
+    console.error(error)
+  }, [error])
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <Card className="w-[350px]">
-        <CardHeader>
-          <CardTitle>Authentication Error</CardTitle>
-          <CardDescription>There was a problem with your request</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p className="text-red-500 mb-4">{error}</p>
-          <Button onClick={() => router.push('/login')} className="w-full">
-            Back to Login
-          </Button>
-        </CardContent>
-      </Card>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-background">
+      <h2 className="text-2xl font-bold mb-4">Authentication Error</h2>
+      <p className="text-muted-foreground mb-4">
+        {error.message || "An unexpected error occurred during authentication."}
+      </p>
+      <div className="flex space-x-4">
+        <Button onClick={() => reset()}>Try again</Button>
+        <Button variant="outline" onClick={() => router.push('/')}>
+          Return to Home
+        </Button>
+      </div>
     </div>
   )
 }

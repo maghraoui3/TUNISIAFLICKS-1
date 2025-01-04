@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect, useState } from 'react'
 import { searchMovies } from './actions';
-import PosterCard from '@/components/PosterCard'
-import routes from '@/routes/client/routes';
+import PosterCard from '@/src/components/PosterCard'
+import routes from '@/src/routes/client/routes';
 
-import PaginationComponent from '@/components/PaginationComponent';
+import PaginationComponent from '@/src/components/PaginationComponent';
 
 export default function Page({searchParams}) {
   const [query, setQuery] = useState(searchParams.q || "");

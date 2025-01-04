@@ -1,14 +1,14 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/src/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
 import { FaLongArrowAltRight } from "react-icons/fa";
 import Link from 'next/link';
-import Genres from '@/components/Genres';
-import MoviePosterCard, { SkeletonLoader as PosterSkeletonLoader } from '@/components/MoviePosterCard'
-import MovieBackdropCard, { SkeletonLoader as BackdropSkeletonLoader } from '@/components/MovieBackdropCard';
+import Genres from '@/src/components/Genres';
+import MoviePosterCard, { SkeletonLoader as PosterSkeletonLoader } from '@/src/components/MoviePosterCard'
+import MovieBackdropCard, { SkeletonLoader as BackdropSkeletonLoader } from '@/src/components/MovieBackdropCard';
 import getMovies from './(movies)/actions';
-import routes from '@/routes/client/routes';
+import routes from '@/src/routes/client/routes';
 
 
 const SkeletonBigSliders = () => {

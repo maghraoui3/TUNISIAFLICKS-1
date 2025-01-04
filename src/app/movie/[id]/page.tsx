@@ -8,12 +8,12 @@ import useEmblaCarousel from 'embla-carousel-react'
 import Image from 'next/image'
 import './carousel.style.css'
 import { FaHeart } from "react-icons/fa6";
-import { Button } from '@/components/ui/button';
+import { Button } from '@/src/components/ui/button';
 import { FaPlay } from "react-icons/fa6";
-import { cn } from "@/lib/utils"
+import { cn } from "@/src/lib/utils"
 import { FaBookmark } from "react-icons/fa";
 import { FaShareAlt } from "react-icons/fa";
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from '@/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from '@/src/components/ui/carousel';
 import { HiOutlineArrowsExpand } from "react-icons/hi";
 
 

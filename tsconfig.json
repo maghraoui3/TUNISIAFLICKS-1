@@ -21,12 +21,11 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./*"]
     },
-    "strictNullChecks": true
+    "strictNullChecks": false,
   },
   "include": [
     "next-env.d.ts",

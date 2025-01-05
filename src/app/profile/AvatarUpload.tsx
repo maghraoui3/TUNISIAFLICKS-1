@@ -9,17 +9,23 @@ import AvatarEditor from "react-avatar-editor"
 import { updateAvatar } from "./actions"
 import { toast } from "@/src/hooks/use-toast"
 
-export default function AvatarUpload({ user }) {
-  const [image, setImage] = useState(null)
+interface User {
+  name?: string;
+  email?: string;
+  image?: string;
+}
+
+export default function AvatarUpload({ user }: { user: User }) {
+  const [image, setImage] = useState<string | null>(null)
   const [scale, setScale] = useState(1)
   const [isOpen, setIsOpen] = useState(false)
-  const editorRef = useRef(null)
+  const editorRef = useRef<AvatarEditor | null>(null)
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0]
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
     if (file) {
       const reader = new FileReader()
-      reader.onload = (e) => setImage(e.target.result)
+      reader.onload = (e) => setImage(e.target?.result as string)
       reader.readAsDataURL(file)
       setIsOpen(true)
     }
@@ -53,7 +59,7 @@ export default function AvatarUpload({ user }) {
         <AvatarImage src={user.image} alt={user.name} />
         <AvatarFallback>{user.name?.charAt(0)}</AvatarFallback>
       </Avatar>
-      <Button variant="outline" onClick={() => document.getElementById('avatar-upload').click()}>
+      <Button variant="outline" onClick={() => document.getElementById('avatar-upload')?.click()}>
         Change Avatar
       </Button>
       <input
@@ -72,16 +78,18 @@ export default function AvatarUpload({ user }) {
             </DialogDescription>
           </DialogHeader>
           <div className="flex flex-col items-center space-y-4">
-            <AvatarEditor
-              ref={editorRef}
-              image={image}
-              width={250}
-              height={250}
-              border={50}
-              borderRadius={125}
-              color={[255, 255, 255, 0.6]}
-              scale={scale}
-            />
+            {image && (
+              <AvatarEditor
+                ref={editorRef}
+                image={image}
+                width={250}
+                height={250}
+                border={50}
+                borderRadius={125}
+                color={[255, 255, 255, 0.6]}
+                scale={scale}
+              />
+            )}
             <div className="w-full max-w-xs">
               <Slider
                 value={[scale]}

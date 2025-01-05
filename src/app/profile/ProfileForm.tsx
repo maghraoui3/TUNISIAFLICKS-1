@@ -33,7 +33,15 @@ const profileFormSchema = z.object({
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>
 
-export default function ProfileForm({ user }) {
+interface User {
+  name?: string;
+  email?: string;
+  phone?: string;
+  birthdate?: string;
+  image?: string;
+}
+
+export default function ProfileForm({ user }: { user: User }) {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
 

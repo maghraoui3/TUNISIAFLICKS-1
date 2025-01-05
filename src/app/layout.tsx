@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     maximumScale: 1,
   },
   verification: {
-    google: 'your-google-site-verification',
+    google: 'aXq6rN-W2lrmjvTfoy1CJUXSmrurfBgJ0wMOR_fQUOU',
     yandex: 'your-yandex-verification',
     yahoo: 'your-yahoo-verification',
     other: {
@@ -78,9 +78,6 @@ export const metadata: Metadata = {
     },
   },
   category: 'Entertainment',
-  other: {
-    'telegram-channel': '@TunisiaFlicks',
-  },
 };
 
 export default function RootLayout({
@@ -90,17 +87,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <meta property="og:title" content="TunisiaFlicks - Free Movies and TV Shows" />
-        <meta property="og:description" content="Stream the latest movies and TV shows for free, without ads, on TunisiaFlicks. High-quality entertainment at your fingertips." />
-        <meta property="og:image" content="https://tunisiaflicks.vercel.app/og-image.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:url" content="https://tunisiaflicks.vercel.app" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="TunisiaFlicks" />
-        <meta name="google-site-verification" content="aXq6rN-W2lrmjvTfoy1CJUXSmrurfBgJ0wMOR_fQUOU" />
-      </head>
       <body className={`${inter.className} transition-colors duration-300`}>
         <SessionProvider>
           <Providers>

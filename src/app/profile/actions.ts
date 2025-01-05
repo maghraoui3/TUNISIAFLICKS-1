@@ -4,9 +4,17 @@ import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/src/pages/api/auth/[...nextauth]"
 import clientPromise from "@/src/lib/mongodb"
 import { ObjectId } from "mongodb"
+import { Session } from "next-auth"
 
-export async function updateProfile(data) {
-  const session = await getServerSession(authOptions)
+interface ProfileData {
+  name?: string
+  email?: string
+  phone?: string
+  birthdate?: string
+}
+
+export async function updateProfile(data: ProfileData) {
+  const session = await getServerSession(authOptions) as Session | null
   if (!session) {
     throw new Error("You must be logged in to update your profile")
   }
@@ -24,14 +32,11 @@ export async function updateProfile(data) {
   }
 }
 
-export async function updateAvatar(avatarDataUrl) {
-  const session = await getServerSession(authOptions)
+export async function updateAvatar(avatarDataUrl: string) {
+  const session = await getServerSession(authOptions) as Session | null
   if (!session) {
     throw new Error("You must be logged in to update your avatar")
   }
-
-  // Here you would typically upload the image to a cloud storage service
-  // and get back a URL. For this example, we'll just store the data URL.
 
   const client = await clientPromise
   const usersCollection = client.db().collection("users")

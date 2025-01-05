@@ -8,8 +8,7 @@ const uri = process.env.MONGODB_URI
 const options = {
   useUnifiedTopology: true,
   useNewUrlParser: true,
-  ssl: true,
-  sslValidate: false,
+  tlsAllowInvalidCertificates: true, // Use this instead of sslValidate
 }
 
 let client

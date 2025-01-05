@@ -1,10 +1,10 @@
-import NextAuth from 'next-auth'
+import NextAuth, { NextAuthOptions, User } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
 import clientPromise from '@/src/lib/mongodb'
 import { compare } from 'bcrypt'
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -33,13 +33,13 @@ export const authOptions = {
           image: user.image,
           phone: user.phone,
           birthdate: user.birthdate,
-        }
+        } as User
       }
     })
   ],
   adapter: MongoDBAdapter(clientPromise),
   session: {
-    strategy: 'jwt',
+    strategy: 'jwt' as const,
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   pages: {
@@ -49,19 +49,19 @@ export const authOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
-        token.phone = user.phone;
-        token.birthdate = user.birthdate;
+        token.id = user.id
+        token.phone = user.phone
+        token.birthdate = user.birthdate
       }
-      return token;
+      return token
     },
     async session({ session, token }) {
-      if (session.user) {
-        session.user.id = token.id;
-        session.user.phone = token.phone;
-        session.user.birthdate = token.birthdate;
+      if (session?.user) {
+        session.user.id = token.id as string
+        session.user.phone = token.phone
+        session.user.birthdate = token.birthdate
       }
-      return session;
+      return session
     },
   },
   secret: process.env.NEXTAUTH_SECRET,

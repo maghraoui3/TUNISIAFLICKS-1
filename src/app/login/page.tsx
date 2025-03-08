@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, Suspense } from 'react'
+import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
@@ -11,12 +11,12 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { AlertCircle } from 'lucide-react'
 import { Alert, AlertDescription } from "@/src/components/ui/alert"
 
-function LoginForm() {
+export default function LoginPage() {
+  const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
-  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -33,7 +33,15 @@ function LoginForm() {
       if (result?.error) {
         setError(result.error)
       } else {
+        // Clear any existing session cookies before redirecting
+        document.cookie.split(';').forEach(cookie => {
+          const [name] = cookie.split('=')
+          if (name.trim().startsWith('__Secure-next-auth.session-token.')) {
+            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`
+          }
+        })
         router.push('/dashboard')
+        router.refresh()
       }
     } catch (error) {
       console.error('Login error:', error)
@@ -93,16 +101,6 @@ function LoginForm() {
         </p>
       </CardFooter>
     </Card>
-  )
-}
-
-export default function LoginPage() {
-  return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <Suspense fallback={<div>Loading...</div>}>
-        <LoginForm />
-      </Suspense>
-    </div>
   )
 }
 
